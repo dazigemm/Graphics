@@ -1,5 +1,12 @@
 html, body {
-	/*height: 100%;
-	/margin: 0;*/
-	background-color: silver;
+	height: 100%;
+	margin: 0;
+}
+
+#top {
+	height: 33%;
+	width: 100%;
+
+	background-color: lightblue;
+	color: white;
 }
