@@ -7,9 +7,12 @@ html, body {
 	height: 33%;
 	width: 100%;
 
+	background-color: lightblue;
+	
+	color: white;
+
 	text-align: center;
 	font-size: 100px;
-
-	background-color: lightblue;
-	color: white;
+	font-family: "Lobster", cursive;
+	text-shadow: -5px 5px 0 black;
 }
