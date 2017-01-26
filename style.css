@@ -4,7 +4,7 @@ html, body {
 }
 
 #top {
-	height: 33%;
+	height: 50%;
 	width: 100%;
 
 	background-color: lightblue;
@@ -12,7 +12,7 @@ html, body {
 	color: white;
 
 	text-align: center;
-	font-size: 100px;
+	font-size: 200px;
 	font-family: "Lobster", cursive;
 	text-shadow: -5px 5px 0 black;
 }
