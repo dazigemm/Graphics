@@ -30,7 +30,7 @@ void main() {
 BREAKDOWN OF A SIMPLE RAY TRACER.
 
 We start with empty space...
-
+Most of the code I added is on B & I.
 
 <font color=#ffaaaa><i><b>NOTE:</b> All the code <font color=white><!!
 >(in white above)</font> is live-editable.
@@ -56,7 +56,7 @@ void main() {
 Define ray origin V and ray direction W for this pixel fragment.
 Made the background a shifting gradient. 
 ---------------------------------------------------------------------
-   x           x
+   xxxxxx      x
 ---------------------------------------------------------------------
 varying vec3 vPos;                               // Position in image
 uniform float uTime;                             // Time
@@ -81,7 +81,7 @@ void main() {
 ---------------------------------------------------------------------
 Define a sphere S as an x,y,z center (0,0,-5) and a radius .5.
 ---------------------------------------------------------------------
-   xxxxx
+                 xxx   
 ---------------------------------------------------------------------
 varying vec3 vPos;                               // Position in image
 uniform float uTime;                             // Time
@@ -252,7 +252,7 @@ void main() {
 ---------------------------------------------------------------------
 Animate position of the sphere and light direction.
 ---------------------------------------------------------------------
-  x               x
+                             xxxxxxxxx
 ---------------------------------------------------------------------
 varying vec3 vPos;                               // Position in image
 uniform float uTime;                             // Time
@@ -283,6 +283,7 @@ void main() {
       brightness = mix(.1, brightness, .5);	// Diffuse surface
       c = mix(vec3(2., 0.,3.) * brightness, c, .5+.5*P*cos(uTime));// color
    }
+
    vec3 origin = vec3(1.,1.,0.);
    vec3 dir = normalize(vec3(vPos.xy, -3.));
    vec4 sphere = vec4(-cos(uTime), -sin(uTime), -5, .35);
