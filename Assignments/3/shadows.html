@@ -44,19 +44,19 @@ vec3 phong(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
 }
 
 
-vec3 shadeSphere(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
+vec3 shadeSphere(vec3 P, vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
    vec3 c = A;
    for (int i = 0; i < uLDirs_length; i++) {	 // Loop through lights
       vec3 LDir = normalize(uLDirs[i]);
-
-      vec2 Shadow = raytraceSphere(N + 0.01, -LDir, uSpheres[i]);
-      if (Shadow.x == 1000.) {
-         float d = max(0., dot(N, LDir));		 // Diffuse value
-         vec3 R = 2. * dot(N, LDir) * N - LDir;	 // Reflection dir
-         float s = pow(max(0., dot(E, R)), S.a);	 // Specular value
-         c += uLColors[i] * (d * D + s * S.rgb * .1*S.a);
+      for (int j = 0; j < uSpheres_length; j++) {
+         vec2 Shadow = raytraceSphere(P + 0.01, LDir, uSpheres[j]);
+         if (Shadow.x == 1000.) {
+            float d = max(0., dot(N, LDir));		 // Diffuse value
+            vec3 R = 2. * dot(N, LDir) * N - LDir;	 // Reflection dir
+            float s = pow(max(0., dot(E, R)), S.a);	 // Specular value
+            c += uLColors[i] * (d * D + s * S.rgb * .1*S.a);
+         }
       }
-      
    }
    return c;
 }
@@ -76,14 +76,14 @@ void main() {
 
    float distance = 1000.;
    
-   for (int i = 0; i < 2; i++) {
+   for (int i = 0; i < 3; i++) {
       vec4 S = uSpheres[i];
       vec2 t = raytraceSphere(V, W, S);		 // Ray trace sphere
       if (t.x < distance) {
          distance = t.x;
 	 vec3 P = V + t.x * W;			 // Point on sphere
          vec3 N = normalize(P - S.xyz);		 // Surface normal
-         c = shadeSphere(P, E, vec3(.01,.1,.01),
+         c = shadeSphere(P, N, E, vec3(.01,.1,.01),
 	 		vec3(.05,.5,.05),
 			vec4(.5,.5,.5,10.));
       }
