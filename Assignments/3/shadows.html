@@ -49,13 +49,13 @@ vec3 shadeSphere(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
    for (int i = 0; i < uLDirs_length; i++) {	 // Loop through lights
       vec3 LDir = normalize(uLDirs[i]);
 
-      float Shadow = 0.//lost. how to form shadow ray??
-      if (Shadow > 0) {//away from light, darken
+      //float Shadow = 0.//lost. how to form shadow ray??
+      //if (Shadow > 0) {//away from light, darken
       float d = max(0., dot(N, LDir));		 // Diffuse value
       vec3 R = 2. * dot(N, LDir) * N - LDir;	 // Reflection dir
       float s = pow(max(0., dot(E, R)), S.a);	 // Specular value
       c += uLColors[i] * (d * D + s * S.rgb * .1*S.a);
-      }
+      //}
    }
    return c;
 }
