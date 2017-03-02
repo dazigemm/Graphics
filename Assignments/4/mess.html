@@ -37,7 +37,7 @@ void main() {
 
    vec3 V = vec3(0.,0.,0.);                      // Ray origin
    vec3 W = normalize(vec3(vPos.xy, -3.));       // Ray direction
-   vec4 S = vec4(0.,0.,-5., .5);                 // Sphere x,y,z,r
+   vec4 S = vec4(cos(uTime),sin(uTime),-5., .5);                 // Sphere x,y,z,r
 
    vec2 t = raytraceSphere(V, W, S);             // Ray trace sphere
    if (t.x > 0.) {
