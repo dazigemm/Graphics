@@ -33,8 +33,9 @@ vec2 raytraceSphere(vec3 V, vec3 W, vec4 S) {
 }
 
 void main() {
-   vec3 c = vec3(.01,.01,.04);                   // Dark background
-
+   vec3 c = vec3(.5,1.,1.);                   // Dark background
+   c = mix(vec3(.1, .0, .3), c, .5+.5*vPos.y);
+   c *= 1. + 5.3 * noise(3. * vPos * sin(60.));
    vec3 V = vec3(0.,0.,0.);                      // Ray origin
    vec3 W = normalize(vec3(vPos.xy, -3.));       // Ray direction
    vec4 S = vec4(cos(uTime),sin(uTime),-5., .5);                 // Sphere x,y,z,r
@@ -45,8 +46,9 @@ void main() {
       vec3 N = normalize(P - S.xyz);             // Surface normal
       float brightness = max(0., dot(N, LDir));
       brightness = mix(.1, brightness, .5);      // Diffuse surface
-      c = vec3(.1,1.,.1) * brightness;
+      c = vec3(1.1,1.,2.1) * brightness;
       c *= turbulence (P*sin(uTime));
+      c *= 1. * 3. * noise(P);  
    }
 
    gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
