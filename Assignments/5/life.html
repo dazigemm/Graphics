@@ -12,7 +12,7 @@
 		<td><canvas id=canvas2 width=400 height=300></td>
 		<td width=50></td>
 		<td>
-			Here comes Person B, harbringer of homework.
+			Here comes Person B, harbinger of homework.
 		</td>
 	</tr>
 
@@ -100,8 +100,21 @@
 		//COME BACK AND ANIMATE
 		g.moveTo(x - 53, y);
 		g.arc(x, y, 50, 0, Math.PI);
-	
 
+		//left eye
+		g.moveTo(x - 25, y - 25);
+		g.lineTo(x - 50, y - 50);
+
+		//right eye
+		g.moveTo(x + 25, y - 25);
+		g.lineTo(x + 50, y - 50);
+
+		//arms
+		//COME BACK AND ANIMATE
+		g.moveTo(x - 30, this.height);
+		g.lineTo(x, y + 100);
+		g.lineTo(x + 100, y + 120);
+		g.lineTo(x + 150, y + 50);
 		g.stroke();
 	};
 
@@ -151,7 +164,9 @@
 	};
 
 	canvas4.update = function(g) {
-		
+		var blue = 128 + Math.floor(128 * Math.sin(10 * time));
+		g.fillStyle = 'rgb(50,255,' + blue + ')';	
+		g.fill();
 
 		g.lineWidth = 5;
 		
@@ -175,7 +190,19 @@
 		//frown
 		g.moveTo(x + 80, y + 50);
 		g.arc(x + 30, y + 50, 50, 0, Math.PI, true);
-	
+
+		//left eye
+		g.moveTo(x - 25, y - 25);
+		g.lineTo(x + 10, y - 50);
+
+		//right eye
+		g.moveTo(x + 75, y - 25);
+		g.lineTo(x + 50, y - 50);
+
+		//arms
+		g.moveTo(x - 30, this.height);
+		g.lineTo(x, y + 100);
+		g.lineTo(x + 30, this.height);
 
 		g.stroke();
 			
