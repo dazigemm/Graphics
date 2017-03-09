@@ -1,0 +1,188 @@
+<table>
+
+	<tr>
+		<td><canvas id=canvas1 width=400 height=300></td>
+		<td width=50></td>
+		<td>
+			Hello World. Meet Person A. Person A says hi. 
+		</td>
+	</tr>
+
+	<tr>
+		<td><canvas id=canvas2 width=400 height=300></td>
+		<td width=50></td>
+		<td>
+			Here comes Person B, harbringer of homework.
+		</td>
+	</tr>
+
+	<tr>
+		<td><canvas id=canvas3 width=400 height=300></td>
+		<td width=50></td>
+		<td>
+			Quick, drag Person A and aid him in his escape.
+		</td>
+	</tr>
+
+	<tr>
+		<td><canvas id=canvas4 width=400 height=300></td>
+		<td width=50></td>
+		<td>
+			Person A realizes there is no escape. Will we ever hear from him again?
+		</td>
+	</tr>
+</table>
+
+<script src=drawlib1.js></script>
+<script>
+	canvas1.update = function(g) {
+		g.lineWidth = 5;
+		
+		//set up border of canvas
+		g.beginPath();
+		g.moveTo(0, 0);
+		g.lineTo(this.width, 0);
+		g.lineTo(this.width, this.height);
+		g.lineTo(0, this.height);
+		g.lineTo(0, 0);
+		g.stroke();
+
+		var x = this.cursor.x;
+		var y = this.cursor.y;
+		var z = this.cursor.z;
+		if (z === 0) {//if cursor not pressed, place at center
+			x = this.width / 2;
+			y = this.height / 2;
+		}
+
+		g.moveTo(x, y);
+		g.lineTo(x, y  + 50);//body
+		g.lineTo(x - 50, y + 100);//right leg
+
+		g.moveTo(x, y + 50);
+		g.lineTo(x + 50, y + 100);//left leg
+
+		var angle = Math.sin(time);
+		var flapY = 30 * Math.sin(angle);
+		
+		g.moveTo(x + 50, y - flapY);//wave right arm
+		g.lineTo(x, y);
+		g.lineTo(x - 50, y);//left arm
+
+		//head
+		g.moveTo(x, y);	
+		g.ellipse(x, y - 50, 30, 30, 90 * Math.PI/180, 0, 2 * Math.PI);//circle
+		
+		g.stroke();
+	};
+
+	canvas2.update = function(g) {
+		g.lineWidth = 5;
+		
+		//set up border of canvas
+		g.beginPath();
+		g.moveTo(0, 0);
+		g.lineTo(this.width, 0);
+		g.lineTo(this.width, this.height);
+		g.lineTo(0, this.height);
+		g.lineTo(0, 0);
+		g.stroke();
+		
+		//setting x and y to the center of canvas
+		var x = this.width / 2;
+		var y = this.height / 2;
+	
+		//head
+		g.moveTo(x, this.height);
+		g.ellipse(x, y, 100, 100, 90 * Math.PI/180, 0, 2 * Math.PI);
+		
+		//smile
+		//COME BACK AND ANIMATE
+		g.moveTo(x - 53, y);
+		g.arc(x, y, 50, 0, Math.PI);
+	
+
+		g.stroke();
+	};
+
+	canvas3.update = function(g) {
+		g.lineWidth = 5;
+		
+		//set up border of canvas
+		g.beginPath();
+		g.moveTo(0, 0);
+		g.lineTo(this.width, 0);
+		g.lineTo(this.width, this.height);
+		g.lineTo(0, this.height);
+		g.lineTo(0, 0);
+		g.stroke();
+
+
+		var x = this.cursor.x;
+		var y = this.cursor.y;
+		var z = this.cursor.z;
+		if (z === 0) {//if cursor not pressed, place at center
+			x = this.width / 2;
+			y = this.height / 2 + 50 * Math.cos(time);
+		}
+
+		g.moveTo(x, y);
+		g.lineTo(x, y  + 50);//body
+		g.lineTo(x - 50, y + 100);//right leg
+
+		g.moveTo(x, y + 50);
+		g.lineTo(x + 50, y + 100);//left leg
+
+		var freq = z == 0 ? 6: 12;
+		var f = .2;
+		var angle = -2 * f * (Math.sin(freq * time) - 0.5);
+		var flapY = 50 * Math.sin(angle);
+		
+		g.moveTo(x + 50, y - flapY);//wave right arm
+		g.lineTo(x, y);
+		g.lineTo(x - 50, y - flapY);//left arm
+
+		//head
+		g.moveTo(x, y);	
+		g.ellipse(x, y - 50, 30, 30, 90 * Math.PI/180, 0, 2 * Math.PI);//circle
+		
+		g.stroke();
+
+	};
+
+	canvas4.update = function(g) {
+		
+
+		g.lineWidth = 5;
+		
+		//set up border of canvas
+		g.beginPath();
+		g.moveTo(0, 0);
+		g.lineTo(this.width, 0);
+		g.lineTo(this.width, this.height);
+		g.lineTo(0, this.height);
+		g.lineTo(0, 0);
+		g.stroke();
+
+		//setting x and y to the center of canvas
+		var x = this.width / 2;
+		var y = this.height / 2;
+	
+		//head
+		g.moveTo(x, this.height);
+		g.ellipse(x, y, 100, 100, 90 * Math.PI/180, 0, 2 * Math.PI);
+		
+		//frown
+		g.moveTo(x + 80, y + 50);
+		g.arc(x + 30, y + 50, 50, 0, Math.PI, true);
+	
+
+		g.stroke();
+			
+	};
+
+
+	draw2DCanvases([ canvas1, canvas2, canvas3, canvas4]);
+</script>
+
+
