@@ -11,8 +11,16 @@ M._stack = [];
 //////////////////////////////////////////////////////////////////////////////
 
 M.identity  = function(m)   {
-	console.log("identity");
-	m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	for (var i = 0; i < 16; i++) {
+		if (i == 0 || i == 5 || i == 10 || i ==15) {
+			m[i] = 1;
+		}
+		else {
+			m[i] = 0;
+		}
+	}
+	//m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	console.log("set to identity: " + m);
 } // Set m values to identity matrix.
 
 M.restore = function(m) {
@@ -23,28 +31,68 @@ M.restore = function(m) {
 	console.log("restore happened, _stack len now: " + M._stack.length);
 } // Pop from a stack to set the 16 values of m.
 
+M.xMatrix = function (radians) {
+	//*
+	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	id[5] = Math.cos(radians);
+	id[6] = -1*Math.sin(radians);
+	id[9] = Math.sin(radians);
+	id[10] = Math.cos(radians);
+	return id;
+	//*/
+	//return [1,0,0,0, 0,Math.cos(radians),-1*Math.sin(radians),0, 0, Math.sin(radians),Math.cos(radians),0, 0,0,0,1];
+}
+
+M.yMatrix = function (radians) {
+//*
+	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	id[0] = Math.cos(radians);
+	id[2] = Math.sin(radians);
+	id[8] = -1*Math.sin(radians);
+	id[10] = Math.cos(radians);
+
+	return id;
+//*/
+//	return [Math.cos(radians),0,Math.sin(radians),0, 0,1,0,0, -1*Math.sin(radians),0,Math.cos(radians),0, 0,0,0,1];
+}
+
+M.zMatrix = function (radians) {
+//*
+	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	id[0]  = Math.cos(radians);
+	id[1]  = -1*Math.sin(radians);
+	id[4]  = Math.sin(radians);
+	id[5]  = Math.cos(radians);
+	//console.log(id);
+	return id;
+
+//*/	return [Math.cos(radians),-1*Math.sin(radians),0,0, Math.sin(radians),Math.cos(radians),0,0, 0,0,1,0, 0,0,0,1];
+}
+
 M.rotateX = function(m, radians) {
-	m[5] = Math.cos(radians);
-	m[6] = -Math.sin(radians);
-	m[9] = Math.sin(radians);
-	m[10] = Math.cos(radians);
-	console.log("rotate x");	
+	console.log("before rotX, m was: " + m);
+	M.matrixMultiply(m, M.xMatrix(radians), m);
+	console.log("rotate x, m now: " + m);	
 } // Modify m, rotating about the X axis.
 
 M.rotateY = function(m, radians) {
-	m[0] = Math.cos(radians);
-	m[2] = Math.sin(radians);
-	m[8] = -Math.sin(radians);
-	m[10] = Math.cos(radians);
-	console.log("rotate y");
+	console.log("before rotY, m was: " + m);
+	M.matrixMultiply(m, M.yMatrix(radians), m);
+	console.log("rotated y, m now: " + m);
 } // Modify m, rotating about the Y axis.
 
 M.rotateZ = function(m, radians) {
-	m[0] = Math.cos(radians);
-	m[1] = -Math.sin(radians);
-	m[4] = Math.sin(radians);
-	m[5] = Math.cos(radians);
-	console.log("rotate z");
+	M.matrixMultiply(m, M.zMatrix(radians), m);
+	/*
+	//M.matrixMultiply(m, M.zMatrix(radians), m);
+	//m = M.zMatrix(radians);
+	///*
+	m[0]  = Math.cos(radians);
+	m[1]  = -Math.sin(radians);
+	m[4]  = Math.sin(radians);
+	m[5]  = Math.cos(radians);
+	//*/
+	console.log("rotate z, m now: " + m);
 } // Modify m, rotating about the Z axis.
 
 M.save = function(m) {
@@ -55,9 +103,10 @@ M.save = function(m) {
 	M._stack.push(_m);
 	console.log("a save happens, _stack now: " + M._stack.length);
 } // Push the 16 values of m onto a stack.
-
-M.scale = function(m, v) {
-	/*var x, y, z;
+//*
+M.sMatrix = function(v) {
+	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+	/*/var x, y, z;
 	if (v instanceOf Array) { 
 		x = v[0];
 		y = v[1];
@@ -66,11 +115,27 @@ M.scale = function(m, v) {
 	else {
 		x = y = z = v;
 	}
-	/*console.log("x: " + x + " y: " + y + " z: " + z);
-	*/
-	m[0] = v[0];
-	m[5] = v[1];
-	m[10] = v[2];
+	id[0] = x;
+	id[5] = y;
+	id[10] = z;
+	//*/
+	//return id;
+	/*
+	var x, y, z;
+	if (v instanceOf Array) {
+		x = v[0];
+		y = v[1];
+		z = v[2];
+	}
+	else 
+		x = y = z = v;//*/
+	return [v,0,0,0, 0,v,0,0, 0,0,v,0, 0,0,0,1];//*/
+
+}
+//*/
+M.scale = function(m, v) {
+	console.log("before scaling, m was: " + m);
+	M.matrixMultiply(m, M.sMatrix(v), m);
 	console.log("scaling happened, m now: " + m);//*/
 } // Modify m, scaling by v[0],v[1],v[2].
 /*
