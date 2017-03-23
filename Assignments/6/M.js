@@ -19,141 +19,110 @@ M.identity  = function(m)   {
 			m[i] = 0;
 		}
 	}
+	//have to set each index??
 	//m = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-	console.log("set to identity: " + m);
+	//console.log("set to identity: " + m);
 } // Set m values to identity matrix.
 
+//given in class
 M.restore = function(m) {
 	var i, _m = M._stack.pop();
 	for (i = 0; i < m.length; i++) {
 		m[i] = _m[i];
 	}
-	console.log("restore happened, _stack len now: " + M._stack.length);
+	//console.log("restore happened, _stack len now: " + M._stack.length);
 } // Pop from a stack to set the 16 values of m.
 
 M.xMatrix = function (radians) {
-	//*
 	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
 	id[5] = Math.cos(radians);
 	id[6] = -1*Math.sin(radians);
 	id[9] = Math.sin(radians);
 	id[10] = Math.cos(radians);
 	return id;
-	//*/
-	//return [1,0,0,0, 0,Math.cos(radians),-1*Math.sin(radians),0, 0, Math.sin(radians),Math.cos(radians),0, 0,0,0,1];
 }
 
 M.yMatrix = function (radians) {
-//*
 	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
 	id[0] = Math.cos(radians);
 	id[2] = Math.sin(radians);
 	id[8] = -1*Math.sin(radians);
 	id[10] = Math.cos(radians);
-
 	return id;
-//*/
-//	return [Math.cos(radians),0,Math.sin(radians),0, 0,1,0,0, -1*Math.sin(radians),0,Math.cos(radians),0, 0,0,0,1];
 }
 
 M.zMatrix = function (radians) {
-//*
 	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
 	id[0]  = Math.cos(radians);
 	id[1]  = -1*Math.sin(radians);
 	id[4]  = Math.sin(radians);
 	id[5]  = Math.cos(radians);
-	//console.log(id);
 	return id;
-
-//*/	return [Math.cos(radians),-1*Math.sin(radians),0,0, Math.sin(radians),Math.cos(radians),0,0, 0,0,1,0, 0,0,0,1];
 }
 
 M.rotateX = function(m, radians) {
-	console.log("before rotX, m was: " + m);
+	//console.log("before rotX, m was: " + m);
 	M.matrixMultiply(m, M.xMatrix(radians), m);
-	console.log("rotate x, m now: " + m);	
+	//console.log("rotate x, m now: " + m);	
 } // Modify m, rotating about the X axis.
 
 M.rotateY = function(m, radians) {
-	console.log("before rotY, m was: " + m);
+	//console.log("before rotY, m was: " + m);
 	M.matrixMultiply(m, M.yMatrix(radians), m);
-	console.log("rotated y, m now: " + m);
+	//console.log("rotated y, m now: " + m);
 } // Modify m, rotating about the Y axis.
 
 M.rotateZ = function(m, radians) {
 	M.matrixMultiply(m, M.zMatrix(radians), m);
-	/*
-	//M.matrixMultiply(m, M.zMatrix(radians), m);
-	//m = M.zMatrix(radians);
-	///*
-	m[0]  = Math.cos(radians);
-	m[1]  = -Math.sin(radians);
-	m[4]  = Math.sin(radians);
-	m[5]  = Math.cos(radians);
-	//*/
-	console.log("rotate z, m now: " + m);
+	//console.log("rotate z, m now: " + m);
 } // Modify m, rotating about the Z axis.
 
+//given in class
 M.save = function(m) {
 	var i, _m = [];
 	for (i = 0; i < m.length; i++) {
 		_m.push(m[i]);
 	}
 	M._stack.push(_m);
-	console.log("a save happens, _stack now: " + M._stack.length);
+	//console.log("a save happens, _stack now: " + M._stack.length);
 } // Push the 16 values of m onto a stack.
-//*
+
 M.sMatrix = function(v) {
+	/*
+	console.log("creating sMatrix");
 	var id = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
-	/*/var x, y, z;
-	if (v instanceOf Array) { 
+	var x, y, z;
+	if (v instanceOf Array) {//=> M is not found??? 
 		x = v[0];
 		y = v[1];
 		z = v[2];
 	}
 	else {
 		x = y = z = v;
-	}
+	//}
 	id[0] = x;
 	id[5] = y;
 	id[10] = z;
-	//*/
-	//return id;
-	/*
-	var x, y, z;
-	if (v instanceOf Array) {
-		x = v[0];
-		y = v[1];
-		z = v[2];
-	}
-	else 
-		x = y = z = v;//*/
-	return [v,0,0,0, 0,v,0,0, 0,0,v,0, 0,0,0,1];//*/
+	console.log("x: " + x + " y: " + y + " z: " + z);
+	return id;
+	*/	
+	return [v,0,0,0, 0,v,0,0, 0,0,v,0, 0,0,0,1];
 
 }
-//*/
-M.scale = function(m, v) {
-	console.log("before scaling, m was: " + m);
-	M.matrixMultiply(m, M.sMatrix(v), m);
-	console.log("scaling happened, m now: " + m);//*/
-} // Modify m, scaling by v[0],v[1],v[2].
-/*
-M.transform = function(m, v) {
-	m[12] *= v[0];
-	m[13] *= v[1];
-	m[14] *= v[2];
-	console.log("transform happened");
-	//return m;
-} // Return vec v transformed by matrix m.
 
-M.translate = function(m, v) {
-	m[3] = v[0];
-	m[7] = v[1];
-	m[11] = v[2];
-	console.log("translation happened");
-} // Modify m, translating by v[0],v[1],v[2].
+M.scale = function(m, v) {
+	//console.log("before scaling, m was: " + m);
+	//console.log("v: " + v);
+	M.matrixMultiply(m, M.sMatrix(v), m);
+	//console.log("scaling happened, m now: " + m);//*/
+} // Modify m, scaling by v[0],v[1],v[2].
+
+/* ********** BELOW ************
+M.transform = function(m, v) {return m;} // Return vec v transformed by matrix m.
+
+M.translate = function(m, v) {	} // Modify m, translating by v[0],v[1],v[2].
 */
+
 //////////////////////////////////////////////////////////////////////////////
 // I have given you a head start by implementing some of the methods for you.
 //
