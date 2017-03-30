@@ -370,10 +370,21 @@
          M.rotateX(m, time/2);
 
 	 // DRAW AN OPEN PARAMETRIC-MESH SPHERE.
-
+	 
          drawCurves(m, S.parametricMesh(S.sphere, 16, 16));
+      M.restore(m);
+      M.save(m);
+         M.rotateY(m, time);
+         M.rotateX(m, -time/2);
+
+	 // DRAW AN OPEN PARAMETRIC-MESH SPHERE.
+
+         //drawCurves(m, S.parametricMesh(S.sphere, 16, 16));
+
+         drawCurves(m, S.parametricMesh(S.torus, 16, 10));
 
       M.restore(m);
+
    }
 
    drawCanvases([canvas1, canvas2, canvas3, canvas4]);
