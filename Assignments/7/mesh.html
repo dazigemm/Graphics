@@ -11,21 +11,21 @@
 		<td><canvas id=canvas2 width=600 height=400></td>
 		<td width=50></td>
 		<td valign=top>
-			Sphere.
+			Spheres.
 		</td>
 	</tr>
 	<tr>
 		<td><canvas id=canvas3 width=600 height=400></td>
 		<td width=50></td>
 		<td valign=top>
-			Torus.
+			Sphere + Torus.
 		</td>
 	</tr>
 	<tr>
 		<td><canvas id=canvas4 width=600 height=400></td>
 		<td width=50></td>
 		<td valign=top>
-			Saturn.
+			Randomness Continued
 		</td>
 	</tr>
 
@@ -183,7 +183,7 @@
 	    g.stroke();
          }
       }
-
+ 
       g.lineCap = 'round';
       g.lineJoin = 'round';
       g.lineWidth = 1;
@@ -198,6 +198,11 @@
       g.lineTo(0,0);
       g.stroke();
 
+      g.fillStyle = 'black';
+      g.fill();
+
+      g.strokeStyle = 'white';
+
       M.identity(m);
       M.scale(m, .5);  // Scale the scene down.
 
@@ -206,12 +211,18 @@
       M.save(m);
          M.rotateY(m, time);
          M.rotateX(m, time/2);
-	 M.translate(m, [Math.cos(time),Math.sin(time),0]);
-	 M.scale(m, .3);
-	 // DRAW AN OPEN PARAMETRIC-MESH SPHERE.
+	 M.scale(m, .5);
+	 // DRAW THREE OPEN PARAMETRIC-MESH SPHERE.
 
-         drawCurves(m, S.parametricMesh(S.sphere, 16, 16));
+         drawCurves(m, S.parametricMesh(S.sphere, 10, 10));
+	 
+	 g.strokeStyle = 'pink';
+	 M.translate(m, [3, 3, 0]);
+	 drawCurves(m, S.parametricMesh(S.sphere, 10, 10));
 
+	 g.strokeStyle = 'teal';
+	 M.translate(m, [-9, -9, 0]);
+	 drawCurves(m, S.parametricMesh(S.sphere, 10, 10));
       M.restore(m);
    }
 
@@ -280,6 +291,15 @@
       g.lineTo(0,0);
       g.stroke();
 
+      g.fillStyle = 'black';
+      g.fill();
+
+      var blue = 128 + Math.floor(128 * Math.sin(5 * time));
+      var green = 128 + Math.floor(128 * Math.cos(10 * time));
+      g.strokeStyle =  'rgb(50, 250,' + blue + ')';
+
+      g.stroke();
+
       M.identity(m);
       M.scale(m, .5);  // Scale the scene down.
 
@@ -291,8 +311,13 @@
 		 
 	 // DRAW AN OPEN PARAMETRIC-MESH TORUS.
 
-         drawCurves(m, S.parametricMesh(S.torus, 16, 10));
-
+         drawCurves(m, S.parametricMesh(S.torus, 30, 10));
+	
+	 g.strokeStyle = 'white';
+	 g.stroke();
+	 M.rotateX(m, -time/2);
+	 M.scale(m, .5);
+	 drawCurves(m, S.parametricMesh(S.sphere, 16, 10));
       M.restore(m);
    }
 
@@ -361,6 +386,11 @@
       g.lineTo(0,0);
       g.stroke();
 
+      var blue = 128 + Math.floor(128 * Math.sin(5 * time));
+      var green = 128 + Math.floor(128 * Math.cos(10 * time));
+      g.strokeStyle =  'rgb(50, 250,' + blue + ')';
+
+
       M.identity(m);
       M.scale(m, .5);  // Scale the scene down.
 
@@ -370,31 +400,38 @@
          M.rotateY(m, time);
          M.rotateX(m, time/2);
 
+	 M.scale(m, 0.5);
 	 // DRAW AN OPEN PARAMETRIC-MESH SPHERE.
 	 
-         drawCurves(m, S.parametricMesh(S.sphere, 30, 30));
-      M.restore(m);
-      M.save(m);
-         M.rotateY(m, time);
-         M.rotateX(m, -time/2);
-
-	 // DRAW AN OPEN PARAMETRIC-MESH SPHERE.
-
-         //drawCurves(m, S.parametricMesh(S.sphere, 16, 16));
-
+         drawCurves(m, S.parametricMesh(S.sphere, 15, 15));
+        
+	 M.scale(m, 2.5);
+	 M.rotateX(m, -time);
+	 g.strokeStyle = 'black';
+	
          drawCurves(m, S.parametricMesh(S.torus, 16, 10));
 
       M.restore(m);
 
       g.lineWidth = 5;
-     /* 
+      
       g.beginPath();
       var x = this.width / 2;
-      var y = this.height / 2;
-      g.moveTo(x, this.height);
-      g.ellipse(x, y, 100, 100, 90 * Math.PI/180, 0, 2 * Math.PI);
+      var y = this.height / 5;
+      //head
+      g.ellipse(x, y, 10, 10, 90 * Math.PI/180, 0, 2 * Math.PI);
+      //body
+      g.lineTo(x, y + 35);
+      //right leg
+      g.lineTo(x + 20, y + 50);
+      g.moveTo(x, y + 35);
+      //left leg
+      g.lineTo(x - 20, y + 50);
+      //arms
+      g.moveTo(x - 20, y + 15);
+      g.lineTo(x + 20, y + 15);
       g.stroke();
-      */
+      
    }
 
    drawCanvases([canvas1, canvas2, canvas3, canvas4]);
