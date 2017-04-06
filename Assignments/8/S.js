@@ -29,3 +29,12 @@ var S = {};
 	       2 * v - 1 ];
    }
 
+   S.sphere = function(u, v) {
+      var theta = 2 * Math.PI * u;
+      var phi = Math.PI * (v - .5);
+      return [
+   	   Math.cos(theta) * Math.cos(phi),
+	   Math.sin(theta) * Math.cos(phi),
+	   Math.sin(phi)
+      ];
+   }
