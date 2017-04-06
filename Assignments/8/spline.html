@@ -25,7 +25,7 @@ Hello World!
    canvas1.update = function(g) {
       g.lineCap = 'round';
       g.lineJoin = 'round';
-      g.lineWidth = 1;
+      g.lineWidth = 5;
 
       // OUTLINE THE CANVAS
 
@@ -36,6 +36,11 @@ Hello World!
       g.lineTo(0,this.height);
       g.lineTo(0,0);
       g.stroke();
+
+      g.fillStyle = 'black';
+      g.fill();
+
+      g.strokeStyle = 'teal';
 
       M.identity(m);
 
@@ -72,11 +77,21 @@ Hello World!
 
             curves.push(C);
          }
-	 
+	
+	 this.drawCurves(m, S.parametricMesh(S.tube, 16, 4));
 	 M.scale(m, .5);
 	 M.translate(m, [-.5, 0, 0]);
 	 M.rotateY(m, 1);
+	 g.strokeStyle = 'white';
          this.drawCurves(m, curves);
+	 //M.rotateY(m, time);
+	 //M.rotateX(m, time/2);
+	 M.rotateZ(m, time);
+	 M.scale(m, .2);
+	 M.translate(m, [6, 2, 0]);
+	 g.strokeStyle = 'teal';
+	 g.lineWidth = 1;
+	 this.drawCurves(m, S.parametricMesh(S.sphere, 15, 6));
 
       M.restore(m);
    }
