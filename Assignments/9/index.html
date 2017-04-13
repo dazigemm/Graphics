@@ -9,18 +9,11 @@
 Example of Bspline curve
 </b></big>
 <p>
-Some ways this could be extended:
-<ul>
-<li>Click midpoint between two key points to insert a new key point.
-<li>Click on a key point to delete it.
-<li>Toggle between open and closed curve.
-<li>Toggle curve appearance: stroke or fill or both in different colors.
-<li>Toggle key points between visible and invisible.&#10003;
-<li>Support multiple curves.
-<li>Use multiple bsplines to create your own font.
-<li>Build a font designer.
-<li>Use multiple bsplines to make an animated face.
-</ul>
+Click in the light blue area to turn lines on/off.
+<br>
+Click in the teal area to turn points on/off.
+<br>
+Click on the points to remove them. There must be at least 3 points remaining.
 </td>
 </tr>
 
@@ -30,7 +23,26 @@ Some ways this could be extended:
 <script src=M.js></script>
 <script src=S.js></script>
 <script>
-   var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
+/* 
+
+Some ways this could be extended:
+<ul>
+<li>Click midpoint between two key points to insert a new key point.
+<li>Click on a key point to delete it.&#10003;
+<li>Toggle between open and closed curve.
+<li>Toggle curve appearance: stroke or fill or both in different colors.
+<li>Toggle key points between visible and invisible.&#10003;
+<li>Support multiple curves.
+<li>Use multiple bsplines to create your own font.
+<li>Build a font designer.
+<li>Use multiple bsplines to make an animated face.
+</ul>
+
+
+*/
+
+
+var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
 
    // Matrix that transforms from [P0,P1,P2,P3] values to cubic coefficients [a,b,c,d].
 
@@ -54,7 +66,7 @@ Some ways this could be extended:
              [  .8, -.5,  0],
            ];
 
-   // HAS TO BE OUTSIDE OF CANVAS, OTHERWISE RESEETS TO TRUE EVERYTIME
+   // HAS TO BE OUTSIDE OF CANVAS, OTHERWISE RESETS TO TRUE EVERYTIME
    var drawPoints = true;
    var drawLines = true;
 
@@ -84,15 +96,15 @@ Some ways this could be extended:
       g.fill();
       
       // place to click to toggle lines
-	 g.fillStyle = 'lightblue';
-	 g.beginPath();
-	 g.lineTo(0, 0);
-	 g.lineTo(0, 50);
-	 g.lineTo(this.width/2, 50);
-	 g.lineTo(this.width/2, 0);
-	 g.fill();
+      g.fillStyle = 'lightblue';
+      g.beginPath();
+      g.lineTo(0, 0);
+      g.lineTo(0, 50);
+      g.lineTo(this.width/2, 50);
+      g.lineTo(this.width/2, 0);
+      g.fill();
      
-      // text so easier to tell
+      // text so easier to tell which area is for which
       // has to be here otherwise would placed in back
       g.font = '35px serif';
       g.strokeText('Lines', 50, 30);
@@ -122,7 +134,10 @@ Some ways this could be extended:
                       dy = P[n][1] - cy;
                   if (dx * dx + dy * dy < 0.05 * 0.05) {
                      this.n = n;
-                     break;
+		     if (P.length > 3) {
+		     	P.splice(n, 1);
+		     }
+		     break;
                   }
                }
          }
@@ -138,10 +153,26 @@ Some ways this could be extended:
             P[this.n][0] = cx;
             P[this.n][1] = cy;
          }	
-	 
-	 // if button down on teal, remove points
-	 // if button down on light blue, remove lines
+	
+	 /*
+	 if (this.cursor.z) {
+            //if (this.n === undefined)
+               for (n = 0 ; n < P.length ; n++) {
+                  let dx = P[n][0] - cx,
+                      dy = P[n][1] - cy;
+                  if (dx * dx + dy * dy < 0.05 * 0.05) {
+                     //this.n = n;
+		     if (P.length > 3) {
+		     	P.splice(n, 1);
+		     }
+		     break;
+                  }
+               }
+         }
+	*/
 
+	 // if button down on teal, flip drawPoints value
+	 // if button down on light blue, flip drawLines value
 
 	 if (this.cursor.z) {
 		 if (this.cursor.y < 50) {
