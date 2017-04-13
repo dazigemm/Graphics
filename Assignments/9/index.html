@@ -15,7 +15,7 @@ Some ways this could be extended:
 <li>Click on a key point to delete it.
 <li>Toggle between open and closed curve.
 <li>Toggle curve appearance: stroke or fill or both in different colors.
-<li>Toggle key points between visible and invisible.
+<li>Toggle key points between visible and invisible.&#10003;
 <li>Support multiple curves.
 <li>Use multiple bsplines to create your own font.
 <li>Build a font designer.
@@ -54,6 +54,10 @@ Some ways this could be extended:
              [  .8, -.5,  0],
            ];
 
+   // HAS TO BE OUTSIDE OF CANVAS, OTHERWISE RESEETS TO TRUE EVERYTIME
+   var drawPoints = true;
+   var drawLines = true;
+
    canvas1.update = function(g) {
       g.lineCap = 'round';
       g.lineJoin = 'round';
@@ -70,17 +74,16 @@ Some ways this could be extended:
       g.lineTo(0,0);
       g.stroke();
 
-	 var drawPoints = true;
-	 var drawLines = true;
-
-	 g.fillStyle = 'teal';
-	 g.beginPath();
-	 g.moveTo(this.width, 0);
-	 g.lineTo(this.width, 50);
-	 g.lineTo(this.width/2, 50);
-	 g.lineTo(this.width/2, 0); 
-	 g.fill();
-
+      // place to click to toggle points
+      g.fillStyle = 'teal';
+      g.beginPath();
+      g.moveTo(this.width, 0);
+      g.lineTo(this.width, 50);
+      g.lineTo(this.width/2, 50);
+      g.lineTo(this.width/2, 0); 
+      g.fill();
+      
+      // place to click to toggle lines
 	 g.fillStyle = 'lightblue';
 	 g.beginPath();
 	 g.lineTo(0, 0);
@@ -88,6 +91,12 @@ Some ways this could be extended:
 	 g.lineTo(this.width/2, 50);
 	 g.lineTo(this.width/2, 0);
 	 g.fill();
+     
+      // text so easier to tell
+      // has to be here otherwise would placed in back
+      g.font = '35px serif';
+      g.strokeText('Lines', 50, 30);
+      g.strokeText('Points', 380, 30);
 
       // DRAW THE SCENE
 
@@ -125,23 +134,22 @@ Some ways this could be extended:
 
          // If a key point is selected, move it to the cursor location.
 	
-	 //console.log(cx, cy);
-	 // if button down on teal, remove points
-	 // if button down on light blue, remove lines
-
          if (this.n !== undefined) {
             P[this.n][0] = cx;
             P[this.n][1] = cy;
-         }
-	
-	 else if (this.cursor.z) {
+         }	
+	 
+	 // if button down on teal, remove points
+	 // if button down on light blue, remove lines
+
+
+	 if (this.cursor.z) {
 		 if (this.cursor.y < 50) {
 			 if (this.cursor.x < this.width/2) {
 				drawLines = !drawLines;
-			 }
-			 else {
+			 }	 			 
+		 	else {
 			 	drawPoints = !drawPoints;
-		 
 			 }
 		 }
 	 }
@@ -187,6 +195,7 @@ Some ways this could be extended:
 		 g.strokeStyle = 'blue';
 		 this.drawCurves(m, curves );
 	 }
+	
 	 // Draw the cursor as red crosshairs.
 
 	 curves = [];
