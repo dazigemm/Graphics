@@ -14,6 +14,8 @@ Click in the light blue area to turn lines on/off.
 Click in the teal area to turn points on/off.
 <br>
 Click on the points to remove them. There must be at least 3 points remaining.
+<br>
+Click around the midpoint between two points to add a point
 </td>
 </tr>
 
@@ -132,6 +134,7 @@ var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
                for (n = 0 ; n < P.length ; n++) {
                   let dx = P[n][0] - cx,
                       dy = P[n][1] - cy;
+		  //console.log(n);
                   if (dx * dx + dy * dy < 0.05 * 0.05) {
                      this.n = n;
 		     if (P.length > 3) {
@@ -139,7 +142,19 @@ var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
 		     }
 		     break;
                   }
-               }
+		  else if (n > 0) {
+			// calculate the midpoint
+			// add point if on click
+			let mx = ((P[n][0] + P[n-1][0])/2) - cx;
+		  	let my = ((P[n][1] + P[n-1][1])/2) - cy;
+			if (mx * mx + my * my < 0.5 * 0.5) {
+				this.n = n;
+				P.push([cx, cy, 0]);
+				//console.log(P);
+				break;
+			}
+		  }
+	       }
          }
 
 	 // When mouse button is up, no key point is selected.
