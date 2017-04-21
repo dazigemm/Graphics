@@ -42,7 +42,7 @@ void main() {
    vec3 R = 2. * dot(normal, LDir) * normal - LDir;	// Reflection dir
    float s = pow(max(0., dot(E, R)), 10.);		// Specular value
    float d = max(0., dot(normal, LDir));		// Diffuse value
-   c = vec3(.01, .1, .01);				// Ambient color
+   c = vec3(.25, .18, .19);				// Ambient color
    c += d * vec3(.05, .5, .05);				// Diffuse color
    c += s * vec3(.5, .5, .5);				// Specular color
    
@@ -63,6 +63,7 @@ var obj1, obj2;
 gl_start(canvas1, vs, fs,
    function(time) {
       M.identity(m);
+      //M.rotateX(m, .5); 
       M.rotateY(m, time);
 
       M.save(m);
@@ -70,27 +71,71 @@ gl_start(canvas1, vs, fs,
       M.restore(m);
 
       M.save(m);
-         M.rotateX(m, .5);
+         M.rotateZ(m, .5);
          obj2.setMatrix(m);
-      M.restore(m);
+     M.restore(m);
    }
 );
    var scene = new Scene();
 
    obj1 = new SceneObject();
    obj1.setVertices([
-      -.3,-.3, 0,  0,0,1,
+      -.3,-.3, 0,  0,0,1,/*center lower left triangle*/
        .3,-.3, 0,  0,0,1,
        .3, .3, 0,  0,0,1,
 	
-       .3, .3, 0,  0,0,1,
+       .3, .3, 0,  0,0,1,/*center upper right triangle*/
       -.3, .3, 0,  0,0,1,
       -.3,-.3, 0,  0,0,1,
-   ]);
-   scene.addObject(obj1);
 
+      -.3,-.3, 0,  0,0,1,/*left edge triangle*/
+      -.6,  0,.5,  0,0,1,
+      -.3, .3, 0,  0,0,1,
+      
+      -.3, .3, 0,  -1.5,0,1,/*top edge triangle*/
+        0, .6,.5,  0,0,1,
+       .3, .3, 0,  0,0,1,
+
+       .3, .3, 0,  -1.5,0,1,/*right edge triangle*/
+       .6,  0,.5,  0,0,1,
+       .3,-.3, 0,  0,0,1,
+
+       .3,-.3, 0,  -1.5,0,1,/*bottom edge triangle*/
+        0,-.6,.5,  0,0,1,
+      -.3,-.3, 0,  0,0,1,
+
+   ]);//*/
+   scene.addObject(obj1);
+//*
    obj2 = new SceneObject();
    obj2.setVertices([
+      -.3,-.3, 0,  0,0,1,/*center lower left triangle*/
+       .3,-.3, 0,  0,0,1,
+       .3, .3, 0,  0,0,1,
+	
+       .3, .3, 0,  0,0,1,/*center upper right triangle*/
+      -.3, .3, 0,  0,0,1,
+      -.3,-.3, 0,  0,0,1,
+
+      -.3,-.3, 0,  0,0,1,/*left edge triangle*/
+      -.6,  0,.5,  0,0,1,
+      -.3, .3, 0,  0,0,1,
+      
+      -.3, .3, 0,  -1.5,0,1,/*top edge triangle*/
+        0, .6,.5,  0,0,1,
+       .3, .3, 0,  0,0,1,
+
+       .3, .3, 0,  -1.5,0,1,/*right edge triangle*/
+       .6,  0,.5,  0,0,1,
+       .3,-.3, 0,  0,0,1,
+
+       .3,-.3, 0,  -1.5,0,1,/*bottom edge triangle*/
+        0,-.6,.5,  0,0,1,
+      -.3,-.3, 0,  0,0,1,
+
+   ]);
+   
+   /*obj2.setVertices([
       -.2,-.2,-.3,  -1.5,0,1,
        .4,-.2, .3,  -0.5,0,1,
        .4, .4, .3,  -0.5,0,1,
@@ -98,9 +143,9 @@ gl_start(canvas1, vs, fs,
        .4, .4, .3,  -0.5,0,1,
       -.2, .4,-.3,  -1.5,0,1,
       -.2,-.2,-.3,  -1.5,0,1,
-   ]);
+   ]);*/
    scene.addObject(obj2);
-
+//*/
    canvas1.scene = scene;
 
 
