@@ -68,14 +68,14 @@ void main() {\n\
 
    var scene = new Scene();
 
-   var material1 = new Material(vs, fs1);
-
+   var material1 = new Material(vs, fs2);
+   material1.setTexture('imgs/roof.jpg');
    var material2 = new Material(vs, fs2);
-   material2.setTexture('imgs/roof.jpg');
+   material2.setTexture('imgs/brick.png');
 
    obj1 = new SceneObject();// roof
    obj1.setVertices(SHAPE.cylinder(3));
-   obj1.setMaterial(material2);
+   obj1.setMaterial(material1);
    scene.addObject(obj1);
 
    obj2 = new SceneObject();// house
