@@ -4,7 +4,18 @@
 
 <body bgcolor=black text=white>
 <center>
-<canvas id='canvas1' width=600 height=600></canvas>
+	<table>
+		<tr>
+			<td>
+				<canvas id='canvas1' width=600 height=600></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				Once upon a time, there lived three little pigs.
+				Still working on this. Texture issues.
+			</td>
+		</tr>
+	</table>
 </center>
 </body>
    
@@ -62,13 +73,13 @@ void main() {\n\
    var material2 = new Material(vs, fs2);
    material2.setTexture('imgs/brick.png');
 
-   obj1 = new SceneObject();
-   obj1.setVertices(SHAPE.cylinder(10));
-   obj1.setMaterial(material1);
+   obj1 = new SceneObject();// roof
+   obj1.setVertices(SHAPE.cylinder(3));
+   obj1.setMaterial(material2);
    scene.addObject(obj1);
 
-   obj2 = new SceneObject();
-   obj2.setVertices(SHAPE.cylinder(20));
+   obj2 = new SceneObject();// house
+   obj2.setVertices(SHAPE.cylinder(4));
    obj2.setMaterial(material2);
    scene.addObject(obj2);
 
@@ -78,20 +89,23 @@ void main() {\n\
 
 gl_start(canvas1,
    function(time) {
-      M.identity(m);
-      M.rotateY(m, time/4);
-      M.rotateZ(m, time/4);
+	
+	M.identity(m);
+	M.rotateY(m, Math.PI/2);//time/4);
+	//M.rotateZ(m, time/4);
 
-      M.save(m);
-         M.scale(m, .2);
-         obj1.setMatrix(m);
-      M.restore(m);
+	M.save(m);
+	 M.scale(m, .2, .2, .3);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 M.translate(m, [-.8, 1.2, 0]);
+	 obj1.setMatrix(m);
+	M.restore(m);
 
-      M.save(m);
-         M.rotateX(m, time);
-         M.scale(m, .1, .1, .4);
-         obj2.setMatrix(m);
-      M.restore(m);
+	M.save(m);
+	 M.rotateX(m, Math.PI/2);
+	 M.scale(m, .2, .25, .2);//, .1, .4);
+	 obj2.setMatrix(m);
+	M.restore(m);
    }
 );
 
