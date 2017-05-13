@@ -110,7 +110,7 @@ void main() {\n\
 }\n\
 ';
 
-   var obj1, obj2, obj3, obj4, obj5, obj6;
+   var obj1, obj2, obj3, obj4, obj5, obj6, tileR, brickH, woodR, woodH, strawR, strawH;
 
    var scene1 = new Scene();// canvas 1
    var scene2 = new Scene();// canvas 2
@@ -128,36 +128,76 @@ void main() {\n\
    var material4 = new Material(vs, fs2);
    material4.setTexture('imgs/straw-3.jpg');// straw
    
+   var materialT = new Material(vs, fs2);
+   materialT.setTexture('imgs/roof.jpg');// tile
+   var materialB = new Material(vs, fs2);
+   materialB.setTexture('imgs/brick.png');// brick
+   var materialW = new Material(vs, fs2);
+   materialW.setTexture('imgs/wood-2.jpg');// wood
+   var materialS = new Material(vs, fs2);
+   materialS.setTexture('imgs/straw-3.jpg');// straw
+
+
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
    obj1.setMaterial(material1);
-   scene1.addObject(obj1);
+   scene6.addObject(obj1);
    
    obj2 = new SceneObject();// brick house
    obj2.setVertices(SHAPE.cylinder(4));
    obj2.setMaterial(material2);
-   scene1.addObject(obj2);
+   scene6.addObject(obj2);
    
    obj3 = new SceneObject();// wood roof
    obj3.setVertices(SHAPE.cylinder(3));
    obj3.setMaterial(material3);
-   scene1.addObject(obj3);
+   scene6.addObject(obj3);
    
    obj4 = new SceneObject();// wood house
    obj4.setVertices(SHAPE.cylinder(4));
    obj4.setMaterial(material3);
-   scene1.addObject(obj4);
+   scene6.addObject(obj4);
    
    obj5 = new SceneObject();// straw roof
    obj5.setVertices(SHAPE.cylinder(3));
    obj5.setMaterial(material4);
-   scene1.addObject(obj5);
+   scene6.addObject(obj5);
    
    obj6 = new SceneObject();// straw house
    obj6.setVertices(SHAPE.cylinder(4));
    obj6.setMaterial(material4);
-   scene1.addObject(obj6);
+   scene6.addObject(obj6);
     
+   tileR = new SceneObject();// tile roof
+   tileR.setVertices(SHAPE.cylinder(3));
+   tileR.setMaterial(materialT);
+   scene2.addObject(tileR);
+   
+   brickH = new SceneObject();// brick house
+   brickH.setVertices(SHAPE.cylinder(4));
+   brickH.setMaterial(materialB);
+   scene2.addObject(brickH);
+
+   woodR = new SceneObject();// wood roof
+   woodR.setVertices(SHAPE.cylinder(3));
+   woodR.setMaterial(materialW);
+   scene3.addObject(woodR);
+   
+   woodH = new SceneObject();// wood house
+   woodH.setVertices(SHAPE.cylinder(4));
+   woodH.setMaterial(materialW);
+   scene3.addObject(woodH);
+
+   strawR = new SceneObject();// straw roof
+   strawR.setVertices(SHAPE.cylinder(3));
+   strawR.setMaterial(materialS);
+   scene4.addObject(strawR);
+   
+   strawH = new SceneObject();// straw house
+   strawH.setVertices(SHAPE.cylinder(4));
+   strawH.setMaterial(materialS);
+   scene4.addObject(strawH);
+
    canvas1.scene = scene1;
    
    canvas2.scene = scene2;
@@ -168,7 +208,7 @@ void main() {\n\
    canvas6.scene = scene6;
    
    var m = M.identityMatrix();
-/*
+//*
 gl_start(canvas2,
    function(time) {
 	
@@ -181,18 +221,18 @@ gl_start(canvas2,
 	 M.scale(m, .25, .15, .25);
 	 M.translate(m, [0, 1.3, 0]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
-	 obj1.setMatrix(m);
+	 tileR.setMatrix(m);
 	M.restore(m);
 
 	M.save(m);// brick house
 	 M.scale(m, .2, .2, .3);
 	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
-	 obj2.setMatrix(m);
+	 brickH.setMatrix(m);
 	M.restore(m);
    }
 );
-
+//*
 gl_start(canvas3,
    function(time) {
 	
@@ -205,7 +245,7 @@ gl_start(canvas3,
 	 M.scale(m, .25, .15, .25);
 	 M.translate(m, [0, 1.3, 0]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
-	 obj3.setMatrix(m);
+	 woodR.setMatrix(m);
 	M.restore(m);
 
 	M.save(m);// stick house 
@@ -213,7 +253,7 @@ gl_start(canvas3,
 	 //M.translate(m, [0, 0, 2.5]);
 	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
-	 obj4.setMatrix(m);
+	 woodH.setMatrix(m);
 	M.restore(m);
    }
 );
@@ -224,7 +264,7 @@ gl_start(canvas4,
 	 M.scale(m, .25, .15, .25);
 	 M.translate(m, [0, 1.3, 0]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
-	 obj5.setMatrix(m);
+	 strawR.setMatrix(m);
 	M.restore(m);
 
 	M.save(m);// straw house 
@@ -232,13 +272,13 @@ gl_start(canvas4,
 	 //M.translate(m, [0, 0, 5]);
 	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
-	 obj6.setMatrix(m);
+	 strawH.setMatrix(m);
 	M.restore(m);
 
    }
 );
-*/
-gl_start(canvas1,
+//*/
+gl_start(canvas6,
    function(time) {
 	
 	M.identity(m);
