@@ -4,17 +4,63 @@
 
 <body bgcolor=black text=white>
 <center>
-	<table>
+	<table border="5px solid white">
 		<tr>
 			<td>
-				<canvas id='canvas1' width=600 height=600></canvas>
+				<canvas id='canvas1' width=600 height=500></canvas>
 			</td>
 			<td width=50></td>
 			<td valign=top>
+				<h1> The Three Little Pigs - An Animated Retelling </h1>
 				Once upon a time, there lived three little pigs.
-				Still working on this. Texture issues.
+				At the age of 18, they were told to grow up and be self sufficient. So they packed their toothbrush, said good-bye to their parents and set off to find a new home.   
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas2' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				Pig 1: Brick
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas3' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				Pig 2: Sticks
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas4' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				Pig 3: Straw
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas5' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				Wolf: Huffity Puff
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas6' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				The End
+			</td>
+		</tr>	
 	</table>
 </center>
 </body>
@@ -64,7 +110,7 @@ void main() {\n\
 }\n\
 ';
 
-   var obj1, obj2, obj3, obj4;
+   var obj1, obj2, obj3, obj4, obj5, obj6;
 
    var scene = new Scene();
 
@@ -73,10 +119,13 @@ void main() {\n\
    var material2 = new Material(vs, fs2);
    material2.setTexture('imgs/brick.png');
    var material3 = new Material(vs, fs2);
-   material3.setTexture('imgs/sticks.jpg');
+   material3.setTexture('imgs/wood-2.jpg');
    var material4 = new Material(vs, fs2);
-   material4.setTexture('imgs/straw.jpg');
-
+   material4.setTexture('imgs/wood-2.jpg');
+   var material5 = new Material(vs, fs2);
+   material5.setTexture('imgs/straw-3.jpg');
+   var material6 = new Material(vs, fs2);
+   material6.setTexture('imgs/straw-3.jpg');
 
    obj1 = new SceneObject();// roof
    obj1.setVertices(SHAPE.cylinder(3));
@@ -98,6 +147,17 @@ void main() {\n\
    obj4.setMaterial(material4);
    scene.addObject(obj4);
 
+   obj5 = new SceneObject();// roof
+   obj5.setVertices(SHAPE.cylinder(3));
+   obj5.setMaterial(material5);
+   scene.addObject(obj5);
+
+   obj6 = new SceneObject();// house
+   obj6.setVertices(SHAPE.cylinder(4));
+   obj6.setMaterial(material6);
+   scene.addObject(obj6);
+
+
    canvas1.scene = scene;
 
    var m = M.identityMatrix();
@@ -108,10 +168,11 @@ gl_start(canvas1,
 	M.identity(m);
 	M.rotateY(m, Math.PI/2);//time/4);
 	//M.rotateZ(m, Math.PI * 11 /6);
-	M.translate(m, [0, 0, -.5]);
+	M.translate(m, [0, 0, -.68]);
+	M.scale(m, 0.9);
 
 	M.save(m);// tile roof
-	 M.scale(m, .25, .2, .25);
+	 M.scale(m, .25, .15, .25);
 	 M.translate(m, [0, 1.3, 0]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
 	 obj1.setMatrix(m);
@@ -125,7 +186,7 @@ gl_start(canvas1,
 	M.restore(m);
   
    	M.save(m);// stick roof
-	 M.scale(m, .25, .2, .25);
+	 M.scale(m, .25, .15, .25);
 	 M.translate(m, [0, 1.3, 3]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
 	 obj3.setMatrix(m);
@@ -139,7 +200,21 @@ gl_start(canvas1,
 	 obj4.setMatrix(m);
 	M.restore(m);
 
-   
+   	M.save(m);// straw roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 6]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 obj5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// straw house 
+	 M.scale(m, .2, .2, .3);
+	 M.translate(m, [0, 0, 5]);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 obj6.setMatrix(m);
+	M.restore(m);
+
    }
 );
 
