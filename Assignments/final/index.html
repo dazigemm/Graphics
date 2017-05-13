@@ -121,40 +121,36 @@ void main() {\n\
    var material3 = new Material(vs, fs2);
    material3.setTexture('imgs/wood-2.jpg');
    var material4 = new Material(vs, fs2);
-   material4.setTexture('imgs/wood-2.jpg');
-   var material5 = new Material(vs, fs2);
-   material5.setTexture('imgs/straw-3.jpg');
-   var material6 = new Material(vs, fs2);
-   material6.setTexture('imgs/straw-3.jpg');
-
-   obj1 = new SceneObject();// roof
+   material4.setTexture('imgs/straw-3.jpg');
+   
+   obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
    obj1.setMaterial(material1);
    scene.addObject(obj1);
 
-   obj2 = new SceneObject();// house
+   obj2 = new SceneObject();// brick house
    obj2.setVertices(SHAPE.cylinder(4));
    obj2.setMaterial(material2);
    scene.addObject(obj2);
 
-   obj3 = new SceneObject();// roof
+   obj3 = new SceneObject();// wood roof
    obj3.setVertices(SHAPE.cylinder(3));
    obj3.setMaterial(material3);
    scene.addObject(obj3);
 
-   obj4 = new SceneObject();// house
+   obj4 = new SceneObject();// wood house
    obj4.setVertices(SHAPE.cylinder(4));
-   obj4.setMaterial(material4);
+   obj4.setMaterial(material3);
    scene.addObject(obj4);
 
-   obj5 = new SceneObject();// roof
+   obj5 = new SceneObject();// straw roof
    obj5.setVertices(SHAPE.cylinder(3));
-   obj5.setMaterial(material5);
+   obj5.setMaterial(material4);
    scene.addObject(obj5);
 
-   obj6 = new SceneObject();// house
+   obj6 = new SceneObject();// straw house
    obj6.setVertices(SHAPE.cylinder(4));
-   obj6.setMaterial(material6);
+   obj6.setMaterial(material4);
    scene.addObject(obj6);
 
 
@@ -166,8 +162,7 @@ gl_start(canvas1,
    function(time) {
 	
 	M.identity(m);
-	M.rotateY(m, Math.PI/2);//time/4);
-	//M.rotateZ(m, Math.PI * 11 /6);
+	M.rotateY(m, Math.PI/2);
 	M.translate(m, [0, 0, -.68]);
 	M.scale(m, 0.9);
 
