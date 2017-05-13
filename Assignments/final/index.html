@@ -112,52 +112,132 @@ void main() {\n\
 
    var obj1, obj2, obj3, obj4, obj5, obj6;
 
-   var scene = new Scene();
+   var scene1 = new Scene();// canvas 1
+   var scene2 = new Scene();// canvas 2
+   var scene3 = new Scene();// canvas 3
+   var scene4 = new Scene();// canvas 4
+   var scene5 = new Scene();// canvas 5
+   var scene6 = new Scene();// canvas 6
 
    var material1 = new Material(vs, fs2);
-   material1.setTexture('imgs/roof.jpg');
+   material1.setTexture('imgs/roof.jpg');// tile
    var material2 = new Material(vs, fs2);
-   material2.setTexture('imgs/brick.png');
+   material2.setTexture('imgs/brick.png');// brick
    var material3 = new Material(vs, fs2);
-   material3.setTexture('imgs/wood-2.jpg');
+   material3.setTexture('imgs/wood-2.jpg');// wood
    var material4 = new Material(vs, fs2);
-   material4.setTexture('imgs/straw-3.jpg');
+   material4.setTexture('imgs/straw-3.jpg');// straw
    
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
    obj1.setMaterial(material1);
-   scene.addObject(obj1);
-
+   scene1.addObject(obj1);
+   
    obj2 = new SceneObject();// brick house
    obj2.setVertices(SHAPE.cylinder(4));
    obj2.setMaterial(material2);
-   scene.addObject(obj2);
-
+   scene1.addObject(obj2);
+   
    obj3 = new SceneObject();// wood roof
    obj3.setVertices(SHAPE.cylinder(3));
    obj3.setMaterial(material3);
-   scene.addObject(obj3);
-
+   scene1.addObject(obj3);
+   
    obj4 = new SceneObject();// wood house
    obj4.setVertices(SHAPE.cylinder(4));
    obj4.setMaterial(material3);
-   scene.addObject(obj4);
-
+   scene1.addObject(obj4);
+   
    obj5 = new SceneObject();// straw roof
    obj5.setVertices(SHAPE.cylinder(3));
    obj5.setMaterial(material4);
-   scene.addObject(obj5);
-
+   scene1.addObject(obj5);
+   
    obj6 = new SceneObject();// straw house
    obj6.setVertices(SHAPE.cylinder(4));
    obj6.setMaterial(material4);
-   scene.addObject(obj6);
+   scene1.addObject(obj6);
+    
+   canvas1.scene = scene1;
+   
+   canvas2.scene = scene2;
+   canvas3.scene = scene3;
+   canvas4.scene = scene4;
 
-
-   canvas1.scene = scene;
-
+   canvas5.scene = scene5;
+   canvas6.scene = scene6;
+   
    var m = M.identityMatrix();
+/*
+gl_start(canvas2,
+   function(time) {
+	
+	M.identity(m);
+	M.rotateY(m, Math.PI/2);
+	M.translate(m, [0, 0, -.68]);
+	M.scale(m, 0.9);
 
+	M.save(m);// tile roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 obj1.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// brick house
+	 M.scale(m, .2, .2, .3);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 obj2.setMatrix(m);
+	M.restore(m);
+   }
+);
+
+gl_start(canvas3,
+   function(time) {
+	
+	M.identity(m);
+	M.rotateY(m, Math.PI/2);
+	M.translate(m, [0, 0, -.68]);
+	M.scale(m, 0.9);
+ 
+   	M.save(m);// stick roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 obj3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// stick house 
+	 M.scale(m, .2, .2, .3);
+	 //M.translate(m, [0, 0, 2.5]);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 obj4.setMatrix(m);
+	M.restore(m);
+   }
+);
+
+gl_start(canvas4,
+   function(time) {
+   	M.save(m);// straw roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 obj5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// straw house 
+	 M.scale(m, .2, .2, .3);
+	 //M.translate(m, [0, 0, 5]);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 obj6.setMatrix(m);
+	M.restore(m);
+
+   }
+);
+*/
 gl_start(canvas1,
    function(time) {
 	
@@ -209,9 +289,10 @@ gl_start(canvas1,
 	 M.rotateX(m, Math.PI/2);
 	 obj6.setMatrix(m);
 	M.restore(m);
-
+//*/
    }
 );
+
 
 </script>
 
