@@ -22,7 +22,7 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Pig 1: Brick
+				The oldest pig... and so he built a brick house.
 			</td>
 		</tr>
 		<tr>
@@ -31,7 +31,7 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Pig 2: Sticks
+				Piglet number two had always dreamed of living in a tree house. Unfortunately, he discovered he could not climb a tree. So he had to settle for a house made of sticks.
 			</td>
 		</tr>
 		<tr>
@@ -40,7 +40,7 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Pig 3: Straw
+				The youngest pig stumbled across a farm for sale. Although he had never spent a day at a farm before, he felt a desire to try his hand at farming. "What better way to understand the farm animals then to learn how they live?" thought the young piglet. Therefore, he decided to spend some time in a straw house.
 			</td>
 		</tr>
 		<tr>
@@ -49,12 +49,21 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Wolf: Huffity Puff
+				Along came a lone wolf. Huffity Puff! Down came the houses of stick and straw. 
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<canvas id='canvas6' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				The End
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas7' width=600 height=500></canvas>
 			</td>
 			<td width=50></td>
 			<td valign=top>
@@ -136,7 +145,6 @@ void main() {\n\
    materialW.setTexture('imgs/wood-2.jpg');// wood
    var materialS = new Material(vs, fs2);
    materialS.setTexture('imgs/straw-3.jpg');// straw
-
 
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
