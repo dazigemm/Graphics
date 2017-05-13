@@ -90,7 +90,7 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				The nice couple was very nice.
+				The nice couple were very nice.
 				They took one look at the wolf and immediately agreed.
 				Not only would they offer the wolf free room and board, they would provide him visits to the salon whenever he wished.
 				The three little piglets were very confused.
@@ -115,7 +115,12 @@
 			</td>
 		</tr>	
 	</table>
-	Happy Mother's Day! If you haven't talked to your mom in a while, now would be a good time to call her up and let her know you're alive.
+	<h2> Happy Mother's Day!
+		<br>
+		If you haven't talked to your mom in a while, now would be a good time to call her up and let her know you're alive.
+		<br>
+		And remember - don't trust strangers.
+	</h2>
 </center>
 </body>
    
@@ -168,15 +173,86 @@ void main() {\n\
      * Three Little Pigs
 
    *********************************************/
-   
-   var obj1, obj2, obj3, obj4, obj5, obj6, tileR, brickH, woodR, woodH, strawR, strawH;
 
    var scene1 = new Scene();// canvas 1
+
+    canvas1.scene = scene1;
+        
+   /**************** CANVAS 2 ******************
+     * Objects: Pig 1, brick house, nice couple
+
+   *********************************************/
+   var tileR, brickH;
    var scene2 = new Scene();// canvas 2
+
+   var materialT = new Material(vs, fs2);
+   materialT.setTexture('imgs/roof.jpg');// tile
+   var materialB = new Material(vs, fs2);
+   materialB.setTexture('imgs/brick.png');// brick
+
+
+   tileR = new SceneObject();// tile roof
+   tileR.setVertices(SHAPE.cylinder(3));
+   tileR.setMaterial(materialT);
+   scene2.addObject(tileR);
+   
+   brickH = new SceneObject();// brick house
+   brickH.setVertices(SHAPE.cylinder(4));
+   brickH.setMaterial(materialB);
+   scene2.addObject(brickH);
+   
+   canvas2.scene = scene2;
+
+   /**************** CANVAS 3 ******************
+     * Objects: Pig 2, wood house
+
+   *********************************************/
+   var woodR, woodH;
    var scene3 = new Scene();// canvas 3
+
+   var materialW = new Material(vs, fs2);
+   materialW.setTexture('imgs/wood-2.jpg');// wood
+
+   woodR = new SceneObject();// wood roof
+   woodR.setVertices(SHAPE.cylinder(3));
+   woodR.setMaterial(materialW);
+   scene3.addObject(woodR);
+   
+   woodH = new SceneObject();// wood house
+   woodH.setVertices(SHAPE.cylinder(4));
+   woodH.setMaterial(materialW);
+   scene3.addObject(woodH);
+  
+   canvas3.scene = scene3;
+
+   /**************** CANVAS 4 ******************
+     * Objects: Pig 3, straw house
+
+   *********************************************/
+   var strawR, strawH;
    var scene4 = new Scene();// canvas 4
+
+   var materialS = new Material(vs, fs2);
+   materialS.setTexture('imgs/straw-3.jpg');// straw
+
+   strawR = new SceneObject();// straw roof
+   strawR.setVertices(SHAPE.cylinder(3));
+   strawR.setMaterial(materialS);
+   scene4.addObject(strawR);
+   
+   strawH = new SceneObject();// straw house
+   strawH.setVertices(SHAPE.cylinder(4));
+   strawH.setMaterial(materialS);
+   scene4.addObject(strawH);
+   
+   canvas4.scene = scene4;
+   
+   /**************** CANVAS 5 ******************
+     * Objects: All three houses, wolf
+
+   *********************************************/
+   var obj1, obj2, obj3, obj4, obj5, obj6;
    var scene5 = new Scene();// canvas 5
-   var scene6 = new Scene();// canvas 6
 
    var material1 = new Material(vs, fs2);
    material1.setTexture('imgs/roof.jpg');// tile
@@ -186,15 +262,6 @@ void main() {\n\
    material3.setTexture('imgs/wood-2.jpg');// wood
    var material4 = new Material(vs, fs2);
    material4.setTexture('imgs/straw-3.jpg');// straw
-   
-   var materialT = new Material(vs, fs2);
-   materialT.setTexture('imgs/roof.jpg');// tile
-   var materialB = new Material(vs, fs2);
-   materialB.setTexture('imgs/brick.png');// brick
-   var materialW = new Material(vs, fs2);
-   materialW.setTexture('imgs/wood-2.jpg');// wood
-   var materialS = new Material(vs, fs2);
-   materialS.setTexture('imgs/straw-3.jpg');// straw
 
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
@@ -225,61 +292,33 @@ void main() {\n\
    obj6.setVertices(SHAPE.cylinder(4));
    obj6.setMaterial(material4);
    scene5.addObject(obj6);
-   
-   /**************** CANVAS 2 ******************
-     * Three Little Pigs Waving
-
-   *********************************************/
- 
-   tileR = new SceneObject();// tile roof
-   tileR.setVertices(SHAPE.cylinder(3));
-   tileR.setMaterial(materialT);
-   scene2.addObject(tileR);
-   
-   brickH = new SceneObject();// brick house
-   brickH.setVertices(SHAPE.cylinder(4));
-   brickH.setMaterial(materialB);
-   scene2.addObject(brickH);
-   
-   /**************** CANVAS 3 ******************
-     * Three Little Pigs Waving
-
-   *********************************************/
-
-   woodR = new SceneObject();// wood roof
-   woodR.setVertices(SHAPE.cylinder(3));
-   woodR.setMaterial(materialW);
-   scene3.addObject(woodR);
-   
-   woodH = new SceneObject();// wood house
-   woodH.setVertices(SHAPE.cylinder(4));
-   woodH.setMaterial(materialW);
-   scene3.addObject(woodH);
-   
-   /**************** CANVAS 4 ******************
-     * Three Little Pigs Waving
-
-   *********************************************/
-
-   strawR = new SceneObject();// straw roof
-   strawR.setVertices(SHAPE.cylinder(3));
-   strawR.setMaterial(materialS);
-   scene4.addObject(strawR);
-   
-   strawH = new SceneObject();// straw house
-   strawH.setVertices(SHAPE.cylinder(4));
-   strawH.setMaterial(materialS);
-   scene4.addObject(strawH);
-
-   canvas1.scene = scene1;
-   
-   canvas2.scene = scene2;
-   canvas3.scene = scene3;
-   canvas4.scene = scene4;
 
    canvas5.scene = scene5;
+
+   /**************** CANVAS 6 ******************
+     * Objects: sad wolf
+
+   *********************************************/
+  
+   var scene6 = new Scene();// canvas 6
+
+
    canvas6.scene = scene6;
+
+   /**************** CANVAS 7 ******************
+     * Objects: confused pigs, happy couple
+
+   *********************************************/
    
+
+
+   /**************** CANVAS 8 ******************
+     * Objects: Wolf with beautiful fur, angry parents of piglets
+
+   *********************************************/
+
+
+
    var m = M.identityMatrix();
 //*
 gl_start(canvas2,
