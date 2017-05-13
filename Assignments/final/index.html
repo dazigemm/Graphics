@@ -69,9 +69,14 @@ void main() {\n\
    var scene = new Scene();
 
    var material1 = new Material(vs, fs2);
-   material1.setTexture('imgs/sticks.jpg');
+   material1.setTexture('imgs/roof.jpg');
    var material2 = new Material(vs, fs2);
    material2.setTexture('imgs/brick.png');
+   var material3 = new Material(vs, fs2);
+   material3.setTexture('imgs/sticks.jpg');
+   var material4 = new Material(vs, fs2);
+   material4.setTexture('imgs/straw.jpg');
+
 
    obj1 = new SceneObject();// roof
    obj1.setVertices(SHAPE.cylinder(3));
@@ -85,12 +90,12 @@ void main() {\n\
 
    obj3 = new SceneObject();// roof
    obj3.setVertices(SHAPE.cylinder(3));
-   obj3.setMaterial(material1);
+   obj3.setMaterial(material3);
    scene.addObject(obj3);
 
    obj4 = new SceneObject();// house
    obj4.setVertices(SHAPE.cylinder(4));
-   obj4.setMaterial(material2);
+   obj4.setMaterial(material4);
    scene.addObject(obj4);
 
    canvas1.scene = scene;
@@ -102,35 +107,39 @@ gl_start(canvas1,
 	
 	M.identity(m);
 	M.rotateY(m, Math.PI/2);//time/4);
-	//M.rotateZ(m, time/4);
+	//M.rotateZ(m, Math.PI * 11 /6);
+	M.translate(m, [0, 0, -.5]);
 
-	M.save(m);
-	 M.scale(m, .2, .2, .3);
+	M.save(m);// tile roof
+	 M.scale(m, .25, .2, .25);
+	 M.translate(m, [0, 1.3, 0]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
-	 M.translate(m, [-.8, 1.2, 0]);
 	 obj1.setMatrix(m);
 	M.restore(m);
 
-	M.save(m);
+	M.save(m);// brick house
+	 M.scale(m, .2, .2, .3);
+	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
-	 M.scale(m, .2, .25, .2);//, .1, .4);
 	 obj2.setMatrix(m);
 	M.restore(m);
-   
-	M.save(m);
-	 M.scale(m, .2, .2, .3);
+  
+   	M.save(m);// stick roof
+	 M.scale(m, .25, .2, .25);
+	 M.translate(m, [0, 1.3, 3]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
-	 M.translate(m, [-.8, 1.2, 3]);
 	 obj3.setMatrix(m);
 	M.restore(m);
 
-	M.save(m);
+	M.save(m);// stick house 
+	 M.scale(m, .2, .2, .3);
+	 M.translate(m, [0, 0, 2.5]);
+	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
-	 M.scale(m, .2, .25, .2);//, .1, .4);
-	 M.translate(m, [0, 3.5, 0]);
 	 obj4.setMatrix(m);
 	M.restore(m);
 
+   
    }
 );
 
