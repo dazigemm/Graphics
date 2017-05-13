@@ -13,7 +13,8 @@
 			<td valign=top>
 				<h1> The Three Little Pigs - An Animated Retelling </h1>
 				Once upon a time, there lived three little pigs.
-				At the age of 18, they were told to grow up and be self sufficient. So they packed their toothbrush, said good-bye to their parents and set off to find a new home.   
+				On their 18th birthday, their parents told them, "You are now adults. It is time for you three to grow up and be self sufficient".
+				So the three little pigs packed their toothbrushes, said good-bye to their parents and set off to find new homes.   
 			</td>
 		</tr>
 		<tr>
@@ -22,7 +23,10 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				The oldest pig... and so he built a brick house.
+				The oldest pig had spent all of his money on food last month. 
+				Fortunately, he met a nice couple along the road. 
+				They offered him free room and board. Suspicious, right?
+				But the nice couple had a nice brick house, so he took them up on their offer.
 			</td>
 		</tr>
 		<tr>
@@ -31,7 +35,11 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Piglet number two had always dreamed of living in a tree house. Unfortunately, he discovered he could not climb a tree. So he had to settle for a house made of sticks.
+				To the dismay of the younger brothers, the nice couple only had one room free.
+				However, they did have a backyard with lots of trees. 
+				Piglet number two had always dreamed of living in a tree house. 
+				Unfortunately, he discovered he could not climb a tree. 
+				He had to settle for a house made of sticks.
 			</td>
 		</tr>
 		<tr>
@@ -40,7 +48,12 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				The youngest pig stumbled across a farm for sale. Although he had never spent a day at a farm before, he felt a desire to try his hand at farming. "What better way to understand the farm animals then to learn how they live?" thought the young piglet. Therefore, he decided to spend some time in a straw house.
+				The youngest pig felt very left out.
+				Where was he supposed to live?
+				Thankfully, the nice couple reassured him that they had a farm, and they just so happened to be hiring.
+				Although he had never spent a day at a farm before, he felt a desire to try his hand at farming. 
+				"What better way to understand the farm animals then to learn how they live?" thought the young piglet. 
+				Therefore, he decided to spend some time in a house of straw.
 			</td>
 		</tr>
 		<tr>
@@ -49,7 +62,13 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				Along came a lone wolf. Huffity Puff! Down came the houses of stick and straw. 
+				The three little pigs lived at their respective houses for a few weeks.
+				They were given good food to eat, and never asked to do any work.
+				One fine day, when the three piglets were sleeping in yet again, a wolf wandered onto the nice couple's property.
+				<br>
+				Huffity Puff!
+				<br>
+				Down came the houses of stick and straw. 
 			</td>
 		</tr>
 		<tr>
@@ -58,7 +77,11 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
-				The End
+				The wolf was sad. All he wanted was a home. 
+				However, all the houses he had come across fell apart when he sneezed.
+				Whenever allergy season rolled around, he had to find a new home.
+				So when the wolf saw that the brick house was still left standing, his heart skipped a beat.
+				He decided to ring the doorbell and ask if he could rent a room. 
 			</td>
 		</tr>
 		<tr>
@@ -67,10 +90,32 @@
 			</td>
 			<td width=50></td>
 			<td valign=top>
+				The nice couple was very nice.
+				They took one look at the wolf and immediately agreed.
+				Not only would they offer the wolf free room and board, they would provide him visits to the salon whenever he wished.
+				The three little piglets were very confused.
+				"I thought you only had one room available..." said the youngest piglet.
+				"Oh but Mr. Wolf seems like such a nice guy. We will find some way to make do," the nice couple replied. "Tonight, we shall have a feast!"
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id='canvas8' width=600 height=500></canvas>
+			</td>
+			<td width=50></td>
+			<td valign=top>
+				In the next town over, the parents of the three young piglet were worried.
+				It had been a month since the three little piglets had left home, but none of them had bothered to visit.
+				There wasn't even a postcard from them to be found.
+				Even Mr. Wolf, the detective they hired to track down their children was no help.
+				Whenever they ran into him, he would only apologize profusely, and tell them he could find neither hide nor hair of them.
+				But he had an appointment at the salon for his fur, and couldn't be late.
+				<br>
 				The End
 			</td>
 		</tr>	
 	</table>
+	Happy Mother's Day! If you haven't talked to your mom in a while, now would be a good time to call her up and let her know you're alive.
 </center>
 </body>
    
@@ -119,6 +164,11 @@ void main() {\n\
 }\n\
 ';
 
+   /**************** CANVAS 1 ******************
+     * Three Little Pigs
+
+   *********************************************/
+   
    var obj1, obj2, obj3, obj4, obj5, obj6, tileR, brickH, woodR, woodH, strawR, strawH;
 
    var scene1 = new Scene();// canvas 1
@@ -149,33 +199,38 @@ void main() {\n\
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
    obj1.setMaterial(material1);
-   scene6.addObject(obj1);
+   scene5.addObject(obj1);
    
    obj2 = new SceneObject();// brick house
    obj2.setVertices(SHAPE.cylinder(4));
    obj2.setMaterial(material2);
-   scene6.addObject(obj2);
+   scene5.addObject(obj2);
    
    obj3 = new SceneObject();// wood roof
    obj3.setVertices(SHAPE.cylinder(3));
    obj3.setMaterial(material3);
-   scene6.addObject(obj3);
+   scene5.addObject(obj3);
    
    obj4 = new SceneObject();// wood house
    obj4.setVertices(SHAPE.cylinder(4));
    obj4.setMaterial(material3);
-   scene6.addObject(obj4);
+   scene5.addObject(obj4);
    
    obj5 = new SceneObject();// straw roof
    obj5.setVertices(SHAPE.cylinder(3));
    obj5.setMaterial(material4);
-   scene6.addObject(obj5);
+   scene5.addObject(obj5);
    
    obj6 = new SceneObject();// straw house
    obj6.setVertices(SHAPE.cylinder(4));
    obj6.setMaterial(material4);
-   scene6.addObject(obj6);
-    
+   scene5.addObject(obj6);
+   
+   /**************** CANVAS 2 ******************
+     * Three Little Pigs Waving
+
+   *********************************************/
+ 
    tileR = new SceneObject();// tile roof
    tileR.setVertices(SHAPE.cylinder(3));
    tileR.setMaterial(materialT);
@@ -185,6 +240,11 @@ void main() {\n\
    brickH.setVertices(SHAPE.cylinder(4));
    brickH.setMaterial(materialB);
    scene2.addObject(brickH);
+   
+   /**************** CANVAS 3 ******************
+     * Three Little Pigs Waving
+
+   *********************************************/
 
    woodR = new SceneObject();// wood roof
    woodR.setVertices(SHAPE.cylinder(3));
@@ -195,6 +255,11 @@ void main() {\n\
    woodH.setVertices(SHAPE.cylinder(4));
    woodH.setMaterial(materialW);
    scene3.addObject(woodH);
+   
+   /**************** CANVAS 4 ******************
+     * Three Little Pigs Waving
+
+   *********************************************/
 
    strawR = new SceneObject();// straw roof
    strawR.setVertices(SHAPE.cylinder(3));
@@ -286,7 +351,7 @@ gl_start(canvas4,
    }
 );
 //*/
-gl_start(canvas6,
+gl_start(canvas5,
    function(time) {
 	
 	M.identity(m);
