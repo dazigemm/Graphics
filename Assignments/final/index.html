@@ -180,8 +180,8 @@ void main() {\n\
    
    var m = M.identityMatrix();
 
-   /**************** CANVAS 1 ******************
-     * Three Little Pigs
+   /**************** CANVAS 1 ****************** 
+    * Three Little Pigs
 
    *********************************************/
     var scene1 = new Scene();// canvas 1
@@ -902,22 +902,401 @@ gl_start(canvas5,
    *********************************************/
   
    var scene6 = new Scene();// canvas 6
+/*
+   var pink2 = new Material(vs, fs1);
+   var pinker2 = new Material(vs, fs3);
+   var black2 = new Material(vs, fs4);
 
 
+   /********* Pig  **********/
+/*
+    var pigHead4, pigNose4, pigEarL4, pigEarR4, pigEyeL4, pigEyeR4,pigNL4, pigNR4, pigBody4;
+
+    pigHead4 = new SceneObject();
+    pigHead4.setVertices(SHAPE.cylinder(50));
+    pigHead4.setMaterial(pink2);
+    scene6.addObject(pigHead4);
+
+    pigNose4 = new SceneObject();
+    pigNose4.setVertices(SHAPE.cylinder(50));
+    pigNose4.setMaterial(pinker2);
+    scene6.addObject(pigNose4);
+
+    pigEarL4 = new SceneObject();
+    pigEarL4.setVertices(SHAPE.cylinder(3));
+    pigEarL4.setMaterial(pinker2);
+    scene6.addObject(pigEarL4);
+
+    pigEarR4 = new SceneObject();
+    pigEarR4.setVertices(SHAPE.cylinder(3));
+    pigEarR4.setMaterial(pinker2);
+    scene6.addObject(pigEarR4);
+
+    pigEyeL4 = new SceneObject();
+    pigEyeL4.setVertices(SHAPE.cylinder(50));
+    pigEyeL4.setMaterial(black2);
+    scene6.addObject(pigEyeL4);
+
+    pigEyeR4 = new SceneObject();
+    pigEyeR4.setVertices(SHAPE.cylinder(50));
+    pigEyeR4.setMaterial(black2);
+    scene6.addObject(pigEyeR4);
+
+    pigNL4 = new SceneObject();
+    pigNL4.setVertices(SHAPE.cylinder(50));
+    pigNL4.setMaterial(black2);
+    scene6.addObject(pigNL4);
+
+    pigNR4 = new SceneObject();
+    pigNR4.setVertices(SHAPE.cylinder(50));
+    pigNR4.setMaterial(black2);
+    scene6.addObject(pigNR4);
+
+    pigBody4 = new SceneObject();
+    pigBody4.setVertices(SHAPE.cylinder(50));
+    pigBody4.setMaterial(pink2);
+    scene6.addObject(pigBody4);
+    scene1.addObject(pigBody2);
+*/
    canvas6.scene = scene6;
+/*
+gl_start(canvas6,
+   function(time) {
+	M.identity(m);
+	//M.rotateY(m, time);
+	M.translate(m, [0, -.5, 0]);
+	M.scale(m, .8);
+	
 
+   /********* Pig **********/
+/*
+	M.save(m);
+	 M.scale(m, .3, .3, 0);
+	 M.translate(m, [-3, 0, 0]); 
+	 pigHead4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .15, .1, 0);
+	 M.translate(m, [-6, -1, 0]);
+	 pigNose4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-8.5, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEarL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-5.5, 1.3, 0]);
+	 pigEarR4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-93, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEyeL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-88, 1.3, 0]);
+	 pigEyeR4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-95, -3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigNL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-87, -3, 0]);
+	 pigNR4.setMatrix(m);
+	M.restore(m);
+	
+	M.save(m);
+	 M.scale(m, .3, .5, 0);
+	 M.translate(m, [-3, -1.5, 0]);
+	 pigBody4.setMatrix(m);
+	M.restore(m);
+
+
+});
+*/
    /**************** CANVAS 7 ******************
      * Objects: confused pigs, happy couple
 
    *********************************************/
    
+var scene7 = new Scene();// canvas 6
+
+   var pink2 = new Material(vs, fs1);
+   var pinker2 = new Material(vs, fs3);
+   var black2 = new Material(vs, fs4);
+
+
+   /********* Pig  **********/
+
+    var pigHead4, pigNose4, pigEarL4, pigEarR4, pigEyeL4, pigEyeR4,pigNL4, pigNR4, pigBody4;
+
+    pigHead4 = new SceneObject();
+    pigHead4.setVertices(SHAPE.cylinder(50));
+    pigHead4.setMaterial(pink2);
+    scene7.addObject(pigHead4);
+
+    pigNose4 = new SceneObject();
+    pigNose4.setVertices(SHAPE.cylinder(50));
+    pigNose4.setMaterial(pinker2);
+    scene7.addObject(pigNose4);
+
+    pigEarL4 = new SceneObject();
+    pigEarL4.setVertices(SHAPE.cylinder(3));
+    pigEarL4.setMaterial(pinker2);
+    scene7.addObject(pigEarL4);
+
+    pigEarR4 = new SceneObject();
+    pigEarR4.setVertices(SHAPE.cylinder(3));
+    pigEarR4.setMaterial(pinker2);
+    scene7.addObject(pigEarR4);
+
+    pigEyeL4 = new SceneObject();
+    pigEyeL4.setVertices(SHAPE.cylinder(50));
+    pigEyeL4.setMaterial(black2);
+    scene7.addObject(pigEyeL4);
+
+    pigEyeR4 = new SceneObject();
+    pigEyeR4.setVertices(SHAPE.cylinder(50));
+    pigEyeR4.setMaterial(black2);
+    scene7.addObject(pigEyeR4);
+
+    pigNL4 = new SceneObject();
+    pigNL4.setVertices(SHAPE.cylinder(50));
+    pigNL4.setMaterial(black2);
+    scene7.addObject(pigNL4);
+
+    pigNR4 = new SceneObject();
+    pigNR4.setVertices(SHAPE.cylinder(50));
+    pigNR4.setMaterial(black2);
+    scene7.addObject(pigNR4);
+
+    pigBody4 = new SceneObject();
+    pigBody4.setVertices(SHAPE.cylinder(50));
+    pigBody4.setMaterial(pink2);
+    scene7.addObject(pigBody4);
+    
+   canvas7.scene = scene7;
+
+gl_start(canvas7,
+   function(time) {
+	M.identity(m);
+	//M.rotateY(m, time);
+	M.translate(m, [0, -.5, 0]);
+	M.scale(m, .8);
+	
+
+   /********* Pig **********/
+
+	M.save(m);
+	 M.scale(m, .3, .3, 0);
+	 M.translate(m, [-3, 0, 0]); 
+	 pigHead4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .15, .1, 0);
+	 M.translate(m, [-6, -1, 0]);
+	 pigNose4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-8.5, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEarL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-5.5, 1.3, 0]);
+	 pigEarR4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-93, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEyeL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-88, 1.3, 0]);
+	 pigEyeR4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-95, -3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigNL4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-87, -3, 0]);
+	 pigNR4.setMatrix(m);
+	M.restore(m);
+	
+	M.save(m);
+	 M.scale(m, .3, .5, 0);
+	 M.translate(m, [-3, -1.5, 0]);
+	 pigBody4.setMatrix(m);
+	M.restore(m);
+
+
+});
 
 
    /**************** CANVAS 8 ******************
      * Objects: Wolf with beautiful fur, angry parents of piglets
 
    *********************************************/
-  
+ var scene8 = new Scene();// canvas 8
+
+   var pink3 = new Material(vs, fs1);
+   var pinker3 = new Material(vs, fs3);
+   var black3 = new Material(vs, fs4);
+
+
+   /********* Pig  **********/
+
+    var pigHead5, pigNose5, pigEarL5, pigEarR5, pigEyeL5, pigEyeR5,pigNL5, pigNR5, pigBody5;
+
+    pigHead5 = new SceneObject();
+    pigHead5.setVertices(SHAPE.cylinder(50));
+    pigHead5.setMaterial(pink3);
+    scene8.addObject(pigHead5);
+
+    pigNose5 = new SceneObject();
+    pigNose5.setVertices(SHAPE.cylinder(50));
+    pigNose5.setMaterial(pinker3);
+    scene8.addObject(pigNose5);
+
+    pigEarL5 = new SceneObject();
+    pigEarL5.setVertices(SHAPE.cylinder(3));
+    pigEarL5.setMaterial(pinker3);
+    scene8.addObject(pigEarL5);
+
+    pigEarR5 = new SceneObject();
+    pigEarR5.setVertices(SHAPE.cylinder(3));
+    pigEarR5.setMaterial(pinker3);
+    scene8.addObject(pigEarR5);
+
+    pigEyeL5 = new SceneObject();
+    pigEyeL5.setVertices(SHAPE.cylinder(50));
+    pigEyeL5.setMaterial(black3);
+    scene8.addObject(pigEyeL5);
+
+    pigEyeR5 = new SceneObject();
+    pigEyeR5.setVertices(SHAPE.cylinder(50));
+    pigEyeR5.setMaterial(black3);
+    scene8.addObject(pigEyeR5);
+
+    pigNL5 = new SceneObject();
+    pigNL5.setVertices(SHAPE.cylinder(50));
+    pigNL5.setMaterial(black3);
+    scene8.addObject(pigNL5);
+
+    pigNR5 = new SceneObject();
+    pigNR5.setVertices(SHAPE.cylinder(50));
+    pigNR5.setMaterial(black3);
+    scene8.addObject(pigNR5);
+
+    pigBody5 = new SceneObject();
+    pigBody5.setVertices(SHAPE.cylinder(50));
+    pigBody5.setMaterial(pink3);
+    scene8.addObject(pigBody5);
+    
+   canvas8.scene = scene8;
+
+gl_start(canvas8,
+   function(time) {
+	M.identity(m);
+	//M.rotateY(m, time);
+	M.translate(m, [0, -.5, 0]);
+	M.scale(m, .8);
+	
+
+   /********* Pig **********/
+
+	M.save(m);
+	 M.scale(m, .3, .3, 0);
+	 M.translate(m, [-3, 0, 0]); 
+	 pigHead5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .15, .1, 0);
+	 //M.scale(m, Math.abs(Math.cos(time)), Math.abs(Math.sin(time)), 1);
+	 M.translate(m, [-6, -1, 0]);
+	 pigNose5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-8.5, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEarL5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [-5.5, 1.3, 0]);
+	 pigEarR5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-93, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEyeL5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [-88, 1.3, 0]);
+	 pigEyeR5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-95, -3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigNL5.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [-87, -3, 0]);
+	 pigNR5.setMatrix(m);
+	M.restore(m);
+	
+	M.save(m);
+	 M.scale(m, .3, .5, 0);
+	 M.translate(m, [-3, -1.5, 0]);
+	 pigBody5.setMatrix(m);
+	M.restore(m);
+
+
+});
+ 
 
 </script>
 
