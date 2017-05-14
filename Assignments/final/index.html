@@ -860,8 +860,9 @@ gl_start(canvas5,
   
    	M.save(m);// stick roof
 	 M.scale(m, .25, .15, .25);
-	 M.translate(m, [0, 1.3, 3]);
+	 M.translate(m, [0, 2 + Math.sin(time), 3]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
+	 M.rotateY(m, time);
 	 obj3.setMatrix(m);
 	M.restore(m);
 
@@ -870,13 +871,15 @@ gl_start(canvas5,
 	 M.translate(m, [0, 0, 2.5]);
 	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
+	 M.rotateY(m, time);
 	 obj4.setMatrix(m);
 	M.restore(m);
 
    	M.save(m);// straw roof
 	 M.scale(m, .25, .15, .25);
-	 M.translate(m, [0, 1.3, 6]);
+	 M.translate(m, [0, 2 + Math.sin(time), 6]);
 	 M.rotateZ(m, Math.PI * 11 / 6);
+	 M.rotateY(m, time);
 	 obj5.setMatrix(m);
 	M.restore(m);
 
@@ -885,6 +888,7 @@ gl_start(canvas5,
 	 M.translate(m, [0, 0, 5]);
 	 M.rotateY(m, Math.PI/4);
 	 M.rotateX(m, Math.PI/2);
+	 M.rotateY(m, time);
 	 obj6.setMatrix(m);
 	M.restore(m);
 //*/
