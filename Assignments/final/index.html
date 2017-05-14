@@ -535,14 +535,17 @@ gl_start(canvas1,
      * Objects: Pig 1, brick house, nice couple
 
    *********************************************/
-   var tileR, brickH;
+   var tileR, brickH, grass, sky;
    var scene2 = new Scene();// canvas 2
 
    var materialT = new Material(vs, fs2);
    materialT.setTexture('imgs/roof.jpg');// tile
    var materialB = new Material(vs, fs2);
    materialB.setTexture('imgs/brick.png');// brick
-
+   var matG = new Material(vs, fs2);
+   matG.setTexture('imgs/grass.jpg');
+   var matSky = new Material(vs, fs2);
+   matSky.setTexture('imgs/clouds.jpg');
 
    tileR = new SceneObject();// tile roof
    tileR.setVertices(SHAPE.cylinder(3));
@@ -553,7 +556,17 @@ gl_start(canvas1,
    brickH.setVertices(SHAPE.cylinder(4));
    brickH.setMaterial(materialB);
    scene2.addObject(brickH);
-   
+  
+   grass = new SceneObject();
+   grass.setVertices(SHAPE.cylinder(4));
+   grass.setMaterial(matG);
+   scene2.addObject(grass);
+
+   sky = new SceneObject();
+   sky.setVertices(SHAPE.cylinder(4));
+   sky.setMaterial(matSky);
+   scene2.addObject(sky);
+
    canvas2.scene = scene2;
 
 gl_start(canvas2,
@@ -563,6 +576,20 @@ gl_start(canvas2,
 	M.rotateY(m, Math.PI/2);
 	M.translate(m, [0, 0, -.68]);
 	M.scale(m, 0.9);
+
+	M.save(m);
+	 M.translate(m, [0, -.9, .68]);
+	 M.rotateZ(m, Math.PI*11 /12);
+	 M.scale(m, 0, .8, 1.5);
+	 grass.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.translate(m, [.5, .5, .68]);
+	 M.rotateZ(m, Math.PI*11 /12);
+	 M.scale(m, 0, 1, 1.5);
+	 sky.setMatrix(m);
+	M.restore(m);
 
 	M.save(m);// tile roof
 	 M.scale(m, .25, .15, .25);
