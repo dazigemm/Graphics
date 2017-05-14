@@ -545,7 +545,7 @@ gl_start(canvas1,
    var matG = new Material(vs, fs2);
    matG.setTexture('imgs/grass.jpg');
    var matSky = new Material(vs, fs2);
-   matSky.setTexture('imgs/clouds.jpg');
+   matSky.setTexture('imgs/sky.jpg');
 
    tileR = new SceneObject();// tile roof
    tileR.setVertices(SHAPE.cylinder(3));
@@ -694,7 +694,7 @@ gl_start(canvas3,
    var matGround = new Material(vs, fs2);
    matGround.setTexture('imgs/grass.jpg');
    var matSky3 = new Material(vs, fs2);
-   matSky3.setTexture('imgs/forest2.jpg');
+   matSky3.setTexture('imgs/sky.jpg');
 
    grass3 = new SceneObject();
    grass3.setVertices(SHAPE.cylinder(4));
@@ -762,7 +762,7 @@ gl_start(canvas4,
      * Objects: All three houses, wolf
 
    *********************************************/
-   var obj1, obj2, obj3, obj4, obj5, obj6;
+   var obj1, obj2, obj3, obj4, obj5, obj6, grass4, sky4;
    var scene5 = new Scene();// canvas 5
 
    var material1 = new Material(vs, fs2);
@@ -773,6 +773,22 @@ gl_start(canvas4,
    material3.setTexture('imgs/wood-2.jpg');// wood
    var material4 = new Material(vs, fs2);
    material4.setTexture('imgs/straw-3.jpg');// straw
+
+   var matGrass = new Material(vs, fs2);
+   matGrass.setTexture('imgs/grass.jpg');
+   var matSky4 = new Material(vs, fs2);
+   matSky4.setTexture('imgs/sky.jpg');
+
+   grass4 = new SceneObject();
+   grass4.setVertices(SHAPE.cylinder(4));
+   grass4.setMaterial(matGrass);
+   scene5.addObject(grass4);
+
+   sky4 = new SceneObject();
+   sky4.setVertices(SHAPE.cylinder(4));
+   sky4.setMaterial(matSky4);
+   scene5.addObject(sky4);
+
 
    obj1 = new SceneObject();// tile roof
    obj1.setVertices(SHAPE.cylinder(3));
@@ -813,6 +829,20 @@ gl_start(canvas5,
 	M.rotateY(m, Math.PI/2);
 	M.translate(m, [0, 0, -.68]);
 	M.scale(m, 0.9);
+
+	M.save(m);
+	 M.translate(m, [0, -.9, .68]);
+	 M.rotateZ(m, Math.PI*11 /12);
+	 M.scale(m, 0, .8, 1.5);
+	 grass4.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.translate(m, [1, .5, .68]); 
+	 M.rotateZ(m, Math.PI/4);
+	 M.scale(m, 1, 1, 1.5);
+	 sky4.setMatrix(m);
+	M.restore(m);
 
 	M.save(m);// tile roof
 	 M.scale(m, .25, .15, .25);
