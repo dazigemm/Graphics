@@ -108,27 +108,7 @@
 				It had been a month since the three little piglets had left home, but none of them had bothered to visit.
 				There wasn't even a postcard from them to be found.
 				Even Mr. Wolf, the detective they hired to track down their children was no help.
-				Whenever they ran into him, he would only apologize profusely, and tell them he could find neither hide nor hair of them.
-				But he had an appointment at the salon for his fur, and couldn't be late.
-				<br>
-				The End
-			</td>
-		</tr>	
-	</table>
-	<h2> Happy Mother's Day!
-		<br>
-		If you haven't talked to your mom in a while, now would be a good time to call her up and let her know you're alive.
-		<br>
-		And remember - don't trust strangers.
-	</h2>
-</center>
-</body>
-   
-<script>
-
-var vs = '\
-attribute vec3 aPos, aNor;\n\
-attribute vec2 aUV;\n\
+				Whenever they ran into him, he would only apologize profusely, and tell them he could find neither hide nor hair of them.  But he had an appointment at the salon for his fur, and couldn't be late.  <br> The End </td> </tr>	</table> <h2> Happy Mother's Day!  <br> If you haven't talked to your mom in a while, now would be a good time to call her up and let her know you're alive.  <br> And remember - don't trust strangers.  </h2> </center> </body> <script> var vs = '\ attribute vec3 aPos, aNor;\n\ attribute vec2 aUV;\n\
 varying   vec3 vPos, vNor;\n\
 varying   vec2 vUV;\n\
 uniform   mat4 matrix, invMatrix;\n\
@@ -142,7 +122,34 @@ void main() {\n\
 }\n\
 ';
 
+// light pink
 var fs1 = '\
+varying vec3 vPos, vNor;\n\
+varying vec2 vUV;\n\
+void main() {\n\
+   vec3 normal = normalize(vNor);\n\
+   vec3 c = vec3(.26,.18,.19);\n\
+   c += vec3(.7,.7,1.) * max(0.,dot(normal, vec3( .7, .7, .7)));\n\
+   c += vec3(.5,.3,.1) * max(0.,dot(normal, vec3(-.7,-.7,-.7)));\n\
+   gl_FragColor = vec4(sqrt(c), 1.);\n\
+}\n\
+';
+
+// dark pink
+var fs3 = '\
+varying vec3 vPos, vNor;\n\
+varying vec2 vUV;\n\
+void main() {\n\
+   vec3 normal = normalize(vNor);\n\
+   vec3 c = vec3(.26,.18,.19);\n\
+   c += vec3(.7,.7,1.) * max(0.,dot(normal, vec3( .7, .7, .7)));\n\
+   c += vec3(.5,.3,.1) * max(0.,dot(normal, vec3(-.7,-.7,-.7)));\n\
+   gl_FragColor = vec4(sqrt(c), 1.);\n\
+}\n\
+';
+
+// gray
+var fs4 = '\
 varying vec3 vPos, vNor;\n\
 varying vec2 vUV;\n\
 void main() {\n\
@@ -153,6 +160,8 @@ void main() {\n\
    gl_FragColor = vec4(sqrt(c), 1.);\n\
 }\n\
 ';
+
+
 
 var fs2 = '\
 varying vec3 vPos, vNor;\n\
@@ -168,16 +177,50 @@ void main() {\n\
    gl_FragColor = vec4(sqrt(c), 1.);\n\
 }\n\
 ';
+   
+   var m = M.identityMatrix();
 
    /**************** CANVAS 1 ******************
      * Three Little Pigs
 
    *********************************************/
+    var pig1, pig2, pig3;
+    var scene1 = new Scene();// canvas 1
 
-   var scene1 = new Scene();// canvas 1
+    var pink = new Material(vs, fs1);
+
+    /*
+    var vertices = [0, 0];
+    var vertexCount = 100;
+    var radius = 0.5;
+    for (var i = 0; i < vertexCount; i++) {
+	    vertices.push(radius * Math.cos((i *2.0 * Math.PI)/ vertexCount));
+	    vertices.push(radius * Math.sin((i * 2.0 * Math.PI)/ vertexCount));
+    }
+    //vertices.push(vertices[0]);
+    //vertices.push(vertices[1]);
+    */ 
+    
+    pig1 = new SceneObject();
+    pig1.setVertices(SHAPE.cylinder(50));
+    pig1.setMaterial(pink);
+    scene1.addObject(pig1);
 
     canvas1.scene = scene1;
-        
+
+gl_start(canvas1,
+   function(time) {
+	
+	M.identity(m);
+	//M.rotateY(m, time);
+
+	M.save(m);
+	 M.scale(m, .25, .25, 0);
+	 pig1.setMatrix(m);
+	M.restore(m);
+   }
+);
+
    /**************** CANVAS 2 ******************
      * Objects: Pig 1, brick house, nice couple
 
@@ -203,6 +246,30 @@ void main() {\n\
    
    canvas2.scene = scene2;
 
+gl_start(canvas2,
+   function(time) {
+	
+	M.identity(m);
+	M.rotateY(m, Math.PI/2);
+	M.translate(m, [0, 0, -.68]);
+	M.scale(m, 0.9);
+
+	M.save(m);// tile roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 tileR.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// brick house
+	 M.scale(m, .2, .2, .3);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 brickH.setMatrix(m);
+	M.restore(m);
+   }
+);
+
    /**************** CANVAS 3 ******************
      * Objects: Pig 2, wood house
 
@@ -225,6 +292,31 @@ void main() {\n\
   
    canvas3.scene = scene3;
 
+gl_start(canvas3,
+   function(time) {
+	
+	M.identity(m);
+	M.rotateY(m, Math.PI/2);
+	M.translate(m, [0, 0, -.68]);
+	M.scale(m, 0.9);
+ 
+   	M.save(m);// stick roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 woodR.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// stick house 
+	 M.scale(m, .2, .2, .3);
+	 //M.translate(m, [0, 0, 2.5]);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 woodH.setMatrix(m);
+	M.restore(m);
+   }
+);
+
    /**************** CANVAS 4 ******************
      * Objects: Pig 3, straw house
 
@@ -246,7 +338,27 @@ void main() {\n\
    scene4.addObject(strawH);
    
    canvas4.scene = scene4;
-   
+ 
+gl_start(canvas4,
+   function(time) {
+   	M.save(m);// straw roof
+	 M.scale(m, .25, .15, .25);
+	 M.translate(m, [0, 1.3, 0]);
+	 M.rotateZ(m, Math.PI * 11 / 6);
+	 strawR.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);// straw house 
+	 M.scale(m, .2, .2, .3);
+	 //M.translate(m, [0, 0, 5]);
+	 M.rotateY(m, Math.PI/4);
+	 M.rotateX(m, Math.PI/2);
+	 strawH.setMatrix(m);
+	M.restore(m);
+
+   }
+);
+  
    /**************** CANVAS 5 ******************
      * Objects: All three houses, wolf
 
@@ -295,101 +407,6 @@ void main() {\n\
 
    canvas5.scene = scene5;
 
-   /**************** CANVAS 6 ******************
-     * Objects: sad wolf
-
-   *********************************************/
-  
-   var scene6 = new Scene();// canvas 6
-
-
-   canvas6.scene = scene6;
-
-   /**************** CANVAS 7 ******************
-     * Objects: confused pigs, happy couple
-
-   *********************************************/
-   
-
-
-   /**************** CANVAS 8 ******************
-     * Objects: Wolf with beautiful fur, angry parents of piglets
-
-   *********************************************/
-
-
-
-   var m = M.identityMatrix();
-//*
-gl_start(canvas2,
-   function(time) {
-	
-	M.identity(m);
-	M.rotateY(m, Math.PI/2);
-	M.translate(m, [0, 0, -.68]);
-	M.scale(m, 0.9);
-
-	M.save(m);// tile roof
-	 M.scale(m, .25, .15, .25);
-	 M.translate(m, [0, 1.3, 0]);
-	 M.rotateZ(m, Math.PI * 11 / 6);
-	 tileR.setMatrix(m);
-	M.restore(m);
-
-	M.save(m);// brick house
-	 M.scale(m, .2, .2, .3);
-	 M.rotateY(m, Math.PI/4);
-	 M.rotateX(m, Math.PI/2);
-	 brickH.setMatrix(m);
-	M.restore(m);
-   }
-);
-//*
-gl_start(canvas3,
-   function(time) {
-	
-	M.identity(m);
-	M.rotateY(m, Math.PI/2);
-	M.translate(m, [0, 0, -.68]);
-	M.scale(m, 0.9);
- 
-   	M.save(m);// stick roof
-	 M.scale(m, .25, .15, .25);
-	 M.translate(m, [0, 1.3, 0]);
-	 M.rotateZ(m, Math.PI * 11 / 6);
-	 woodR.setMatrix(m);
-	M.restore(m);
-
-	M.save(m);// stick house 
-	 M.scale(m, .2, .2, .3);
-	 //M.translate(m, [0, 0, 2.5]);
-	 M.rotateY(m, Math.PI/4);
-	 M.rotateX(m, Math.PI/2);
-	 woodH.setMatrix(m);
-	M.restore(m);
-   }
-);
-
-gl_start(canvas4,
-   function(time) {
-   	M.save(m);// straw roof
-	 M.scale(m, .25, .15, .25);
-	 M.translate(m, [0, 1.3, 0]);
-	 M.rotateZ(m, Math.PI * 11 / 6);
-	 strawR.setMatrix(m);
-	M.restore(m);
-
-	M.save(m);// straw house 
-	 M.scale(m, .2, .2, .3);
-	 //M.translate(m, [0, 0, 5]);
-	 M.rotateY(m, Math.PI/4);
-	 M.rotateX(m, Math.PI/2);
-	 strawH.setMatrix(m);
-	M.restore(m);
-
-   }
-);
-//*/
 gl_start(canvas5,
    function(time) {
 	
@@ -445,6 +462,29 @@ gl_start(canvas5,
    }
 );
 
+
+   /**************** CANVAS 6 ******************
+     * Objects: sad wolf
+
+   *********************************************/
+  
+   var scene6 = new Scene();// canvas 6
+
+
+   canvas6.scene = scene6;
+
+   /**************** CANVAS 7 ******************
+     * Objects: confused pigs, happy couple
+
+   *********************************************/
+   
+
+
+   /**************** CANVAS 8 ******************
+     * Objects: Wolf with beautiful fur, angry parents of piglets
+
+   *********************************************/
+  
 
 </script>
 
