@@ -971,7 +971,7 @@ gl_start(canvas5,
     var wolfHead4, wolfSnout4, wolfEarL4, wolfEarR4, wolfEyeL4, wolfEyeR4,wolfNose, wolfN, wolfBody4;
 
     wolfBody4 = new SceneObject();
-    wolfBody4.setVertices(SHAPE.cylinder(3));
+    wolfBody4.setVertices(SHAPE.cylinder(50));
     wolfBody4.setMaterial(gray);
     scene6.addObject(wolfBody4);
 
@@ -1083,9 +1083,9 @@ gl_start(canvas6,
 
 
 	M.save(m);
-	 M.scale(m, 1, 1, 0);
+	 M.scale(m, .5, 1, 0);
 	 M.translate(m, [0, -1, 0]);
-	 M.rotateZ(m, Math.PI/2);
+	 M.rotateZ(m, Math.PI/4);
 	 wolfBody4.setMatrix(m);
 	M.restore(m);
 
