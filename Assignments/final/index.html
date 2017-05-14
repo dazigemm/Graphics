@@ -190,6 +190,8 @@ void main() {\n\
     var pinker = new Material(vs, fs3);
     var black = new Material(vs, fs4);
 
+    /********* Pig 1 **********/
+
     var pigHead1, pigNose1, pigEarL1, pigEarR1, pigEyeL1, pigEyeR1,pigNL1, pigNR1, pigBody1;
 
     pigHead1 = new SceneObject();
@@ -237,7 +239,9 @@ void main() {\n\
     pigBody1.setMaterial(pink);
     scene1.addObject(pigBody1);
 
-    var pigHead1, pigNose1, pigEarL2, pigEarR2, pigEyeL2, pigEyeR2,pigNL2, pigNR2, pigBody2;
+    /********* Pig 2 **********/
+
+    var pigHead2, pigNose2, pigEarL2, pigEarR2, pigEyeL2, pigEyeR2,pigNL2, pigNR2, pigBody2;
 
     pigHead2 = new SceneObject();
     pigHead2.setVertices(SHAPE.cylinder(50));
@@ -283,6 +287,55 @@ void main() {\n\
     pigBody2.setVertices(SHAPE.cylinder(50));
     pigBody2.setMaterial(pink);
     scene1.addObject(pigBody2);
+
+    /********* Pig 3 **********/
+
+    var pigHead3, pigNose3, pigEarL3, pigEarR3, pigEyeL3, pigEyeR3,pigNL3, pigNR3, pigBody3;
+
+    pigHead3 = new SceneObject();
+    pigHead3.setVertices(SHAPE.cylinder(50));
+    pigHead3.setMaterial(pink);
+    scene1.addObject(pigHead3);
+
+    pigNose3 = new SceneObject();
+    pigNose3.setVertices(SHAPE.cylinder(50));
+    pigNose3.setMaterial(pinker);
+    scene1.addObject(pigNose3);
+
+    pigEarL3 = new SceneObject();
+    pigEarL3.setVertices(SHAPE.cylinder(3));
+    pigEarL3.setMaterial(pinker);
+    scene1.addObject(pigEarL3);
+
+    pigEarR3 = new SceneObject();
+    pigEarR3.setVertices(SHAPE.cylinder(3));
+    pigEarR3.setMaterial(pinker);
+    scene1.addObject(pigEarR3);
+
+    pigEyeL3 = new SceneObject();
+    pigEyeL3.setVertices(SHAPE.cylinder(50));
+    pigEyeL3.setMaterial(black);
+    scene1.addObject(pigEyeL3);
+
+    pigEyeR3 = new SceneObject();
+    pigEyeR3.setVertices(SHAPE.cylinder(50));
+    pigEyeR3.setMaterial(black);
+    scene1.addObject(pigEyeR3);
+
+    pigNL3 = new SceneObject();
+    pigNL3.setVertices(SHAPE.cylinder(50));
+    pigNL3.setMaterial(black);
+    scene1.addObject(pigNL3);
+
+    pigNR3 = new SceneObject();
+    pigNR3.setVertices(SHAPE.cylinder(50));
+    pigNR3.setMaterial(black);
+    scene1.addObject(pigNR3);
+
+    pigBody3 = new SceneObject();
+    pigBody3.setVertices(SHAPE.cylinder(50));
+    pigBody3.setMaterial(pink);
+    scene1.addObject(pigBody3);
 
 
 
@@ -416,8 +469,65 @@ gl_start(canvas1,
 	M.restore(m);
 
 	/********* Pig 3 **********/
+	M.save(m);
+	 M.scale(m, .3, .3, 0);
+	 M.translate(m, [3, 0, 0]); 
+	 pigHead3.setMatrix(m);
+	M.restore(m);
 
+	M.save(m);
+	 M.scale(m, .15, .1, 0);
+	 //M.scale(m, Math.abs(Math.cos(time)), Math.abs(Math.sin(time)), 1);
+	 M.translate(m, [6, -1, 0]);
+	 pigNose3.setMatrix(m);
+	M.restore(m);
 
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [5.5, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEarL3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .13, .13, 0);
+	 M.translate(m, [8.5, 1.3, 0]);
+	 pigEarR3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [88, 1.3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigEyeL3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .02, 0);
+	 M.translate(m, [93, 1.3, 0]);
+	 pigEyeR3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [87, -3, 0]);
+	 M.rotateZ(m, Math.PI/3);
+	 pigNL3.setMatrix(m);
+	M.restore(m);
+
+	M.save(m);
+	 M.scale(m, .01, .03, 0);
+	 M.translate(m, [95, -3, 0]);
+	 pigNR3.setMatrix(m);
+	M.restore(m);
+	
+	M.save(m);
+	 M.scale(m, .3, .5, 0);
+	 M.translate(m, [3, -1.5, 0]);
+	 pigBody3.setMatrix(m);
+	M.restore(m);
+
+	
    }
 );
 
